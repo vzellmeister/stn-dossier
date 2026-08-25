@@ -95,57 +95,81 @@ strong{font-weight:600}
 .era-span{font-family:'IBM Plex Mono','Courier New',monospace;
   font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
   font-weight:400;color:var(--muted);margin-left:.5em;white-space:nowrap}
-/* Alternating-tick timeline. --band: era-label strip above everything;
-   --zone: half-height of the event field, one on each side of the axis;
-   an event tick spans a full zone, so its far end is exactly where that
-   event's text starts (up) or ends (down). */
-.tlg{--band:3.2rem;--zone:4.4rem;--axis:7.6rem;
-  display:flex;position:relative;height:12rem;margin:1.8rem 0 .4rem}
-.tlg::after{content:"";position:absolute;right:0;top:calc(var(--axis) - .6rem);
-  height:1.2rem;border-right:2px solid var(--muted)}
-.tlg-era{flex:var(--w,1) 1 0;min-width:0;position:relative}
-.tlg-era::after{content:"";position:absolute;left:0;right:0;top:var(--axis);
-  border-top:2px solid var(--muted)}
-.tlg-era.tlg-open::after{border-top-style:dotted}
-.tlg-era::before{content:"";position:absolute;left:0;
-  top:calc(var(--axis) - .6rem);
-  height:1.2rem;border-left:2px solid var(--muted)}
-.tlg-era.tlg-open::before{content:none}
-.tlg-lbl{position:absolute;top:0;left:.55rem;right:.2rem;
+/* Stacked timeline: one row per era, oldest first. --gut is the label
+   gutter; --up/--down are the bands either side of that row's line, and
+   an event tick spans its whole band, so the tick's far end is exactly
+   where the label starts (up) or ends (down). The line wraps between
+   rows through the two elbows on .tlg-axis. */
+.tlg{--gut:10.7rem;--zone:4.6rem;--gap:1.4rem;
+  position:relative;margin:1.8rem 0 .6rem}
+.tlg-row{--up:var(--zone);--down:var(--zone);position:relative;
+  height:calc(var(--up) + var(--down));margin-bottom:var(--gap)}
+.tlg-row.tlg-solo{--down:1.5rem}
+.tlg-row.tlg-bare{--up:2.7rem;--down:1.3rem}
+.tlg-row:last-child{margin-bottom:0}
+.tlg-lbl{position:absolute;left:0;width:var(--gut);box-sizing:border-box;
+  bottom:calc(var(--down) + .35rem);padding-right:.8rem;text-align:right;
   font-family:'IBM Plex Mono','Courier New',monospace;font-size:.66rem;
   letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
-.tlg-lbl .era-span{font-size:.62rem;margin-left:0}
-.tlg-evs{position:absolute;left:0;right:0;top:var(--band);bottom:0;
-  display:flex;align-items:stretch;gap:.4rem;padding:0 .35rem 0 .85rem}
-a.ev{flex:1 1 0;min-width:0;position:relative;z-index:1;
+.tlg-lbl .era-span{display:block;font-size:.62rem;margin-left:0}
+.tlg-axis{position:absolute;left:var(--gut);right:0;top:var(--up);height:0;
+  border-top:2px solid var(--muted)}
+.tlg-row.tlg-open .tlg-axis{border-top-style:dotted}
+.tlg-row.tlg-open .tlg-axis::after{border-top-style:dotted;
+  border-right-style:dotted}
+/* The wrap: the line itself turns down off the end of each row and
+   re-enters from above at the start of the next, in the axis weight so
+   the two stubs read as the same line cut and continued. */
+.tlg-row:not(:first-child) .tlg-axis{left:calc(var(--gut) + .9rem)}
+.tlg-row:not(:last-child) .tlg-axis{right:.9rem}
+.tlg-row:not(:last-child) .tlg-axis::after{content:"";position:absolute;
+  left:100%;top:-2px;width:.9rem;height:1.9rem;
+  border-top:2px solid var(--muted);border-right:2px solid var(--muted);
+  border-top-right-radius:.65rem}
+.tlg-row:not(:first-child) .tlg-axis::before{content:"";position:absolute;
+  right:100%;bottom:0;width:.9rem;height:1.9rem;
+  border-left:2px solid var(--muted);border-bottom:2px solid var(--muted);
+  border-bottom-left-radius:.65rem}
+/* present day: the line stops against a cap */
+.tlg-row:last-child .tlg-axis::after{content:"";position:absolute;right:0;
+  top:-.6rem;height:1.2rem;border-right:2px solid var(--muted)}
+.tlg-evs{position:absolute;left:calc(var(--gut) + 1.75rem);right:1.9rem;
+  top:0;bottom:0;display:flex;align-items:stretch;gap:.5rem}
+a.ev{flex:1 1 0;min-width:0;max-width:15rem;position:relative;z-index:1;
   display:flex;flex-direction:column;padding-left:.5rem;text-align:left;
   font-size:.78rem;line-height:1.3;text-decoration:none;
   overflow-wrap:break-word}
 a.ev::before{content:"";position:absolute;left:0;width:0;
-  height:var(--zone);border-left:1px solid var(--accent)}
+  border-left:1px solid var(--accent)}
 a.ev::after{content:"";position:absolute;left:-.22rem;
-  top:calc(var(--zone) - .25rem);width:.5rem;height:.5rem;
+  top:calc(var(--up) - .25rem);width:.5rem;height:.5rem;
   background:var(--accent)}
-.ev-up{justify-content:flex-start;padding-bottom:var(--zone)}
-.ev-up::before{top:0}
-.ev-down{justify-content:flex-end;padding-top:var(--zone)}
-.ev-down::before{top:var(--zone)}
+.ev-up{justify-content:flex-start;padding-bottom:var(--down)}
+.ev-up::before{top:0;height:var(--up)}
+.ev-down{justify-content:flex-end;padding-top:var(--up)}
+.ev-down::before{top:var(--up);bottom:0}
 a.ev:hover .ev-name,a.ev:focus-visible .ev-name{text-decoration:underline}
 .ev-when{font-size:.7rem;color:var(--muted);margin-top:.1rem}
 @media (max-width:48rem){
-  .tlg{display:block;height:auto;margin:1.2rem 0 0}
-  .tlg::after{left:0;right:auto;top:auto;bottom:0;height:0;width:1.2rem;
-    border-right:none;border-top:2px solid var(--muted)}
-  .tlg-era{padding:0 0 1.1rem 1.9rem}
-  .tlg-era::after{left:.6rem;right:auto;top:0;bottom:0;
-    border-top:none;border-left:2px solid var(--muted)}
-  .tlg-era.tlg-open::after{border-left-style:dotted}
-  .tlg-era::before{left:0;top:.5rem;height:0;width:1.2rem;
-    border-left:none;border-top:2px solid var(--muted)}
-  .tlg-lbl{position:static;margin-bottom:.4rem}
+  .tlg{margin:1.2rem 0 0}
+  .tlg-row,.tlg-row.tlg-solo,.tlg-row.tlg-bare{height:auto;margin:0;
+    padding:0 0 1.1rem 1.9rem}
+  .tlg-lbl{position:static;width:auto;padding:0;text-align:left;
+    margin-bottom:.4rem}
+  .tlg-lbl .era-span{display:inline;margin-left:.5em}
+  .tlg-axis,
+  .tlg-row:not(:first-child) .tlg-axis,
+  .tlg-row:not(:last-child) .tlg-axis{left:.6rem;right:auto;top:0;bottom:0;
+    height:auto;border-top-width:0;border-left:2px solid var(--muted)}
+  .tlg-row.tlg-open .tlg-axis{border-top-width:0;border-left-style:dotted}
+  /* stacked already reads as one line — the wrap elbows would only add noise */
+  .tlg-row:not(:first-child) .tlg-axis::before,
+  .tlg-row:not(:last-child) .tlg-axis::after{content:none}
+  .tlg-row:last-child .tlg-axis::after{content:"";left:-.6rem;right:auto;
+    top:auto;bottom:0;height:0;width:1.2rem;border-right:none;
+    border-top:2px solid var(--muted)}
   .tlg-evs{position:static;display:block;padding:0}
-  a.ev,.ev-up,.ev-down{display:block;text-align:left;position:relative;
-    padding:.18rem 0}
+  a.ev,.ev-up,.ev-down{display:block;max-width:none;padding:.18rem 0}
   a.ev::before{content:none}
   a.ev::after{left:-1.63rem;top:50%;transform:translateY(-50%)}
   .ev-when{margin-left:.45em}
@@ -173,7 +197,7 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <nav class="index" aria-label="Contents"><details open><summary class="grp">Overview</summary><ul><li><a href="#timeline">Timeline</a></li><li><a href="#world-bible">World Bible — Signal to Noise</a></li><li><a href="#glossary">Signal to Noise — canon glossary</a></li></ul></details><details open><summary class="grp">Events</summary><ul><li><a href="#baltic-incident">Baltic Incident</a></li><li><a href="#dissolution-of-the-ussr">Dissolution of the USSR</a></li><li><a href="#fall">Fall</a></li><li><a href="#founding-of-the-jdit">Founding of the JDIT</a></li><li><a href="#jena-inheritance">Jena Inheritance</a></li><li><a href="#subject-357-case">Subject 357 Case</a></li></ul></details><details open><summary class="grp">Factions</summary><ul><li><a href="#anscom">ANSCOM</a></li><li><a href="#jdit">JDIT</a></li><li><a href="#nii-19">NII-19</a></li><li><a href="#pale-lantern">PALE LANTERN</a></li><li><a href="#the-berger-programme">The Berger Programme</a></li><li><a href="#the-gardener">The Gardener</a></li></ul></details><details open><summary class="grp">Arcs</summary><ul><li><a href="#the-blight">The Blight</a></li></ul></details><details open><summary class="grp">Locations</summary><ul><li><a href="#baltic-hotspot">Baltic Hotspot</a></li><li><a href="#kaltenroda">Kaltenroda</a></li><li><a href="#the-jena-lab">The Jena Lab</a></li><li><a href="#vienna">Vienna</a></li></ul></details><details open><summary class="grp">People</summary><ul><li><a href="#hans-berger">Hans Berger</a></li><li><a href="#subject-357">Subject 357</a></li></ul></details><details><summary class="grp">Canon decisions</summary><ul><li><a href="#001-table-agreements">Canon 001: Table agreements</a></li><li><a href="#002-psi-is-the-gardeners-cultivation">Canon 002: Psi is the Gardener's cultivation</a></li><li><a href="#003-jdit-keeps-the-field-clear">Canon 003: JDIT keeps the field clear</a></li><li><a href="#004-ancient-cultivation-modern-bloom">Canon 004: Ancient cultivation, modern bloom</a></li><li><a href="#005-the-world-is-dualistic">Canon 005: The world is dualistic</a></li><li><a href="#006-the-gardener-fell-in-deep-time">Canon 006: The Gardener fell in deep time</a></li><li><a href="#007-sixty-thousand-receivers-suspected-world">Canon 007: Sixty thousand receivers, a suspecting world</a></li><li><a href="#008-the-founding-of-the-jdit">Canon 008: The founding of the JDIT</a></li><li><a href="#009-the-undertow-is-peopled">Canon 009: The Undertow is peopled</a></li><li><a href="#010-the-gardener-thinks-through-receivers">Canon 010: The Gardener thinks through receivers</a></li><li><a href="#011-the-substance-came-from-subject-357">Canon 011: The substance came from Subject 357</a></li><li><a href="#012-power-estranges">Canon 012: Power estranges</a></li><li><a href="#013-the-berger-scale">Canon 013: The Berger scale</a></li><li><a href="#014-anscom-salvages-its-dead">Canon 014: ANSCOM salvages its dead</a></li><li><a href="#015-the-gardener-is-primal">Canon 015: The Gardener is primal</a></li><li><a href="#016-its-mind-grows-with-its-thralls">Canon 016: Its mind grows with its thralls</a></li><li><a href="#017-anscom-feeds-what-it-fights">Canon 017: ANSCOM feeds what it fights</a></li><li><a href="#018-corruption-is-alienation">Canon 018: Corruption is alienation</a></li><li><a href="#019-loudness-sets-a-floor">Canon 019: Loudness sets a floor</a></li><li><a href="#020-the-door-opens-from-inside">Canon 020: The door opens from inside</a></li><li><a href="#021-the-roads-in">Canon 021: The roads in</a></li><li><a href="#022-alienation-can-recede">Canon 022: Alienation can recede</a></li><li><a href="#023-retirement-is-a-needle">Canon 023: Retirement is a needle</a></li><li><a href="#024-the-astral-corpus">Canon 024: The astral corpus</a></li><li><a href="#025-corruption-is-openness">Canon 025: Corruption is openness</a></li><li><a href="#026-the-end-of-the-line-is-a-seed">Canon 026: The end of the line is a seed</a></li><li><a href="#027-everyone-is-broadcasting">Canon 027: Everyone is broadcasting</a></li><li><a href="#028-the-closed-list">Canon 028: The closed list</a></li><li><a href="#029-the-undertow-linkage-table">Canon 029: The Undertow-linkage table</a></li><li><a href="#030-the-impossible-tier-is-real">Canon 030: The impossible tier is real</a></li></ul></details><details open><summary class="grp">Open threads</summary><ul><li><a href="#open-threads">Open threads — Signal to Noise</a></li></ul></details></nav>
 <main>
 <section class="note" id="timeline"><div class="eyebrow">Compiled from event files</div><h2>Timeline</h2>
-<div class="tlg"><div class="tlg-era tlg-open" style="--w:1"><div class="tlg-evs"><a class="ev ev-up" href="#fall"><span class="ev-name">Fall</span> <span class="ev-when">deep time</span></a></div></div><div class="tlg-era" style="--w:1"><div class="tlg-lbl">Occultism era <span class="era-span">1800–1900</span></div><div class="tlg-evs"></div></div><div class="tlg-era" style="--w:1"><div class="tlg-lbl">Early research era <span class="era-span">1900–1949</span></div><div class="tlg-evs"><a class="ev ev-down" href="#jena-inheritance"><span class="ev-name">Jena Inheritance</span> <span class="ev-when">1941–1945</span></a></div></div><div class="tlg-era" style="--w:1"><div class="tlg-lbl">Cold War era <span class="era-span">1950–1986</span></div><div class="tlg-evs"><a class="ev ev-up" href="#subject-357-case"><span class="ev-name">Subject 357 Case</span> <span class="ev-when">1986–87</span></a></div></div><div class="tlg-era" style="--w:3"><div class="tlg-lbl">JDIT era <span class="era-span">1987–present</span></div><div class="tlg-evs"><a class="ev ev-down" href="#baltic-incident"><span class="ev-name">Baltic Incident</span> <span class="ev-when">1987</span></a><a class="ev ev-up" href="#founding-of-the-jdit"><span class="ev-name">Founding of the JDIT</span> <span class="ev-when">1987</span></a><a class="ev ev-down" href="#dissolution-of-the-ussr"><span class="ev-name">Dissolution of the USSR</span> <span class="ev-when">1991</span></a></div></div></div>
+<div class="tlg"><div class="tlg-row tlg-open tlg-solo"><div class="tlg-axis"></div><div class="tlg-evs"><a class="ev ev-up" href="#fall"><span class="ev-name">Fall</span> <span class="ev-when">deep time</span></a></div></div><div class="tlg-row tlg-bare"><div class="tlg-lbl">Occultism era<span class="era-span">1800–1900</span></div><div class="tlg-axis"></div><div class="tlg-evs"></div></div><div class="tlg-row tlg-solo"><div class="tlg-lbl">Early research era<span class="era-span">1900–1949</span></div><div class="tlg-axis"></div><div class="tlg-evs"><a class="ev ev-up" href="#jena-inheritance"><span class="ev-name">Jena Inheritance</span> <span class="ev-when">1941–1945</span></a></div></div><div class="tlg-row tlg-solo"><div class="tlg-lbl">Cold War era<span class="era-span">1950–1986</span></div><div class="tlg-axis"></div><div class="tlg-evs"><a class="ev ev-up" href="#subject-357-case"><span class="ev-name">Subject 357 Case</span> <span class="ev-when">1986–87</span></a></div></div><div class="tlg-row"><div class="tlg-lbl">JDIT era<span class="era-span">1987–present</span></div><div class="tlg-axis"></div><div class="tlg-evs"><a class="ev ev-up" href="#baltic-incident"><span class="ev-name">Baltic Incident</span> <span class="ev-when">1987</span></a><a class="ev ev-down" href="#founding-of-the-jdit"><span class="ev-name">Founding of the JDIT</span> <span class="ev-when">1987</span></a><a class="ev ev-up" href="#dissolution-of-the-ussr"><span class="ev-name">Dissolution of the USSR</span> <span class="ev-when">1991</span></a></div></div></div>
 </section>
 <section class="note" id="world-bible"><div class="eyebrow">Overview</div><h2>World Bible — Signal to Noise</h2>
 <p>Canonical worldbuilding decisions, one section per stage of <span class="stub" title="not included in this dossier">core-questionnaire</span> (plus whatever the genre/system modules add). Each entry cites the session where it was decided (<code>decided in [[S###-…]]</code>). If a session note and this file disagree, fix whichever is wrong — then tell the <code>lorekeeper</code>. Player-safe summaries get copied to Handouts; this file never leaves the GM screen.</p>
