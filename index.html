@@ -20,7 +20,12 @@
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:Spectral,Georgia,'Times New Roman',serif;
   font-size:1.02rem;line-height:1.6}
-.page{max-width:44rem;margin:0 auto;padding:0 1.25rem 6rem}
+.page{max-width:66rem;margin:0 auto;padding:0 1.25rem 6rem;
+  display:grid;grid-template-columns:15rem minmax(0,44rem);
+  gap:0 2.5rem;align-items:start;justify-content:center}
+.page>.classification{grid-column:1/-1}
+header.cover{grid-column:2;grid-row:2}
+main{grid-column:2;grid-row:3;min-width:0}
 .classification{font-family:'IBM Plex Mono','Courier New',monospace;
   font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
   color:var(--accent);border-top:3px double var(--accent);
@@ -33,13 +38,15 @@ header.cover{margin-bottom:2.5rem}
 h1{font-size:2.4rem;font-weight:600;line-height:1.15;margin:.1em 0 .4em;
   text-wrap:balance}
 .cover p{color:var(--muted);max-width:60ch}
-nav.index{background:var(--surface);border:1px solid var(--line);
-  padding:1.1rem 1.4rem;margin:2rem 0}
+nav.index{grid-column:1;grid-row:2/span 2;position:sticky;top:1rem;
+  max-height:calc(100vh - 2rem);overflow-y:auto;align-self:start;
+  background:var(--surface);border:1px solid var(--line);
+  padding:1.1rem 1.4rem;margin:0}
 nav.index .grp{font-family:'IBM Plex Mono','Courier New',monospace;
   font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--accent);margin:.9em 0 .3em}
 nav.index .grp:first-child{margin-top:0}
-nav.index ul{list-style:none;margin:0;padding:0;columns:2;column-gap:2rem}
+nav.index ul{list-style:none;margin:0;padding:0}
 nav.index li{margin:.14em 0;font-size:.93rem;break-inside:avoid}
 section.note{background:var(--surface);border:1px solid var(--line);
   padding:1.4rem 1.7rem 1.6rem;margin:1.8rem 0}
@@ -82,8 +89,19 @@ th{background:var(--th-bg);font-family:'IBM Plex Mono','Courier New',monospace;
   font-weight:500}
 del{color:var(--muted)}
 strong{font-weight:600}
+.era-span{font-family:'IBM Plex Mono','Courier New',monospace;
+  font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  font-weight:400;color:var(--muted);margin-left:.5em;white-space:nowrap}
+.empty{color:var(--muted);font-style:italic}
+@media (max-width:62rem){
+  .page{display:block;max-width:44rem}
+  nav.index{position:static;max-height:none;overflow:visible;margin:2rem 0}
+  nav.index ul{columns:2;column-gap:2rem}
+}
 @media (max-width:34rem){nav.index ul{columns:1}}
 @media print{
+  .page{display:block;max-width:44rem}
+  nav.index{position:static;max-height:none;overflow:visible;margin:2rem 0}
   section.note{break-inside:avoid;border:none;padding:0 0 1rem}
   .classification{color:#a32c22}
 }
@@ -95,7 +113,25 @@ strong{font-weight:600}
 <p>A modern-world GURPS psionics campaign. Rules content excluded.
 Dotted-underline terms reference notes not included in this dossier.</p>
 </header>
-<nav class="index" aria-label="Contents"><div class="grp">Overview</div><ul><li><a href="#world-bible">World Bible — Signal to Noise</a></li><li><a href="#glossary">Signal to Noise — canon glossary</a></li></ul><div class="grp">Canon decisions</div><ul><li><a href="#001-table-agreements">Canon 001: Table agreements</a></li><li><a href="#002-psi-is-the-gardeners-cultivation">Canon 002: Psi is the Gardener's cultivation</a></li><li><a href="#003-jdit-keeps-the-field-clear">Canon 003: JDIT keeps the field clear</a></li><li><a href="#004-ancient-cultivation-modern-bloom">Canon 004: Ancient cultivation, modern bloom</a></li><li><a href="#005-the-world-is-dualistic">Canon 005: The world is dualistic</a></li><li><a href="#006-the-gardener-fell-in-deep-time">Canon 006: The Gardener fell in deep time</a></li><li><a href="#007-sixty-thousand-receivers-suspected-world">Canon 007: Sixty thousand receivers, a suspecting world</a></li><li><a href="#008-the-baltic-incident-founded-jdit">Canon 008: The Baltic Incident founded JDIT</a></li><li><a href="#009-the-undertow-is-peopled">Canon 009: The Undertow is peopled</a></li><li><a href="#010-the-gardener-thinks-through-receivers">Canon 010: The Gardener thinks through receivers</a></li><li><a href="#011-the-substance-came-from-subject-357">Canon 011: The substance came from Subject 357</a></li><li><a href="#012-power-estranges">Canon 012: Power estranges</a></li><li><a href="#013-the-berger-scale">Canon 013: The Berger scale</a></li><li><a href="#014-anscom-salvages-its-dead">Canon 014: ANSCOM salvages its dead</a></li><li><a href="#015-the-gardener-is-primal">Canon 015: The Gardener is primal</a></li><li><a href="#016-its-mind-grows-with-its-thralls">Canon 016: Its mind grows with its thralls</a></li><li><a href="#017-anscom-feeds-what-it-fights">Canon 017: ANSCOM feeds what it fights</a></li><li><a href="#018-corruption-is-alienation">Canon 018: Corruption is alienation</a></li><li><a href="#019-loudness-sets-a-floor">Canon 019: Loudness sets a floor</a></li><li><a href="#020-the-door-opens-from-inside">Canon 020: The door opens from inside</a></li><li><a href="#021-the-roads-in">Canon 021: The roads in</a></li><li><a href="#022-alienation-can-recede">Canon 022: Alienation can recede</a></li><li><a href="#023-retirement-is-a-needle">Canon 023: Retirement is a needle</a></li><li><a href="#024-the-astral-corpus">Canon 024: The astral corpus</a></li><li><a href="#025-corruption-is-openness">Canon 025: Corruption is openness</a></li><li><a href="#026-the-end-of-the-line-is-a-seed">Canon 026: The end of the line is a seed</a></li><li><a href="#027-everyone-is-broadcasting">Canon 027: Everyone is broadcasting</a></li><li><a href="#028-the-closed-list">Canon 028: The closed list</a></li><li><a href="#029-the-undertow-linkage-table">Canon 029: The Undertow-linkage table</a></li><li><a href="#030-the-impossible-tier-is-real">Canon 030: The impossible tier is real</a></li></ul><div class="grp">Factions</div><ul><li><a href="#anscom">ANSCOM</a></li><li><a href="#jdit">JDIT</a></li><li><a href="#the-gardener">The Gardener</a></li></ul><div class="grp">Arcs</div><ul><li><a href="#the-blight">The Blight</a></li></ul><div class="grp">Locations</div><ul><li><a href="#baltic-hotspot">Baltic Hotspot</a></li><li><a href="#vienna">Vienna</a></li></ul><div class="grp">People</div><ul><li><a href="#hans-berger">Hans Berger</a></li><li><a href="#subject-357">Subject 357</a></li></ul></nav>
+<nav class="index" aria-label="Contents"><div class="grp">Overview</div><ul><li><a href="#timeline">Timeline</a></li><li><a href="#world-bible">World Bible — Signal to Noise</a></li><li><a href="#glossary">Signal to Noise — canon glossary</a></li></ul><div class="grp">Events</div><ul><li><a href="#the-baltic-incident">The Baltic Incident</a></li><li><a href="#the-fall">The Fall</a></li><li><a href="#the-founding-of-jdit">The Founding of JDIT</a></li><li><a href="#the-subject-357-case">The Subject 357 Case</a></li></ul><div class="grp">Factions</div><ul><li><a href="#anscom">ANSCOM</a></li><li><a href="#jdit">JDIT</a></li><li><a href="#the-gardener">The Gardener</a></li></ul><div class="grp">Arcs</div><ul><li><a href="#the-blight">The Blight</a></li></ul><div class="grp">Locations</div><ul><li><a href="#baltic-hotspot">Baltic Hotspot</a></li><li><a href="#vienna">Vienna</a></li></ul><div class="grp">People</div><ul><li><a href="#hans-berger">Hans Berger</a></li><li><a href="#subject-357">Subject 357</a></li></ul><div class="grp">Canon decisions</div><ul><li><a href="#001-table-agreements">Canon 001: Table agreements</a></li><li><a href="#002-psi-is-the-gardeners-cultivation">Canon 002: Psi is the Gardener's cultivation</a></li><li><a href="#003-jdit-keeps-the-field-clear">Canon 003: JDIT keeps the field clear</a></li><li><a href="#004-ancient-cultivation-modern-bloom">Canon 004: Ancient cultivation, modern bloom</a></li><li><a href="#005-the-world-is-dualistic">Canon 005: The world is dualistic</a></li><li><a href="#006-the-gardener-fell-in-deep-time">Canon 006: The Gardener fell in deep time</a></li><li><a href="#007-sixty-thousand-receivers-suspected-world">Canon 007: Sixty thousand receivers, a suspecting world</a></li><li><a href="#008-the-baltic-incident-founded-jdit">Canon 008: The Baltic Incident founded JDIT</a></li><li><a href="#009-the-undertow-is-peopled">Canon 009: The Undertow is peopled</a></li><li><a href="#010-the-gardener-thinks-through-receivers">Canon 010: The Gardener thinks through receivers</a></li><li><a href="#011-the-substance-came-from-subject-357">Canon 011: The substance came from Subject 357</a></li><li><a href="#012-power-estranges">Canon 012: Power estranges</a></li><li><a href="#013-the-berger-scale">Canon 013: The Berger scale</a></li><li><a href="#014-anscom-salvages-its-dead">Canon 014: ANSCOM salvages its dead</a></li><li><a href="#015-the-gardener-is-primal">Canon 015: The Gardener is primal</a></li><li><a href="#016-its-mind-grows-with-its-thralls">Canon 016: Its mind grows with its thralls</a></li><li><a href="#017-anscom-feeds-what-it-fights">Canon 017: ANSCOM feeds what it fights</a></li><li><a href="#018-corruption-is-alienation">Canon 018: Corruption is alienation</a></li><li><a href="#019-loudness-sets-a-floor">Canon 019: Loudness sets a floor</a></li><li><a href="#020-the-door-opens-from-inside">Canon 020: The door opens from inside</a></li><li><a href="#021-the-roads-in">Canon 021: The roads in</a></li><li><a href="#022-alienation-can-recede">Canon 022: Alienation can recede</a></li><li><a href="#023-retirement-is-a-needle">Canon 023: Retirement is a needle</a></li><li><a href="#024-the-astral-corpus">Canon 024: The astral corpus</a></li><li><a href="#025-corruption-is-openness">Canon 025: Corruption is openness</a></li><li><a href="#026-the-end-of-the-line-is-a-seed">Canon 026: The end of the line is a seed</a></li><li><a href="#027-everyone-is-broadcasting">Canon 027: Everyone is broadcasting</a></li><li><a href="#028-the-closed-list">Canon 028: The closed list</a></li><li><a href="#029-the-undertow-linkage-table">Canon 029: The Undertow-linkage table</a></li><li><a href="#030-the-impossible-tier-is-real">Canon 030: The impossible tier is real</a></li></ul></nav>
+<main>
+<section class="note" id="timeline"><div class="eyebrow">Compiled from event files</div><h2>Timeline</h2>
+<h3 id="timeline--occultism-era">Occultism era <span class="era-span">pre-1900</span></h3>
+<ul>
+<li><strong>deep time</strong> — <a href="#the-fall">The Fall</a> — The <a class="tl" href="#glossary--the-gardener">Gardener</a>'s arrival on Earth in deep time — cast down, not landed. Stub; detailing queued.</li>
+</ul>
+<h3 id="timeline--early-research-era">Early research era <span class="era-span">1900–1949</span></h3>
+<p class="empty">No event notes yet.</p>
+<h3 id="timeline--cold-war-agencies-era">Cold War agencies era <span class="era-span">1950–1986</span></h3>
+<ul>
+<li><strong>1986–87</strong> — <a href="#the-subject-357-case">The Subject 357 Case</a> — a Chernobyl containment worker's tumors secreted a psionically reactive <a class="tl" href="#glossary--the-substance">substance</a>; the Soviet psi division's incurable patient died, and the posthumous material entered the shipment breached in <a href="#the-baltic-incident">The Baltic Incident</a>.</li>
+</ul>
+<h3 id="timeline--jdit-era">JDIT era <span class="era-span">1987–present</span></h3>
+<ul>
+<li><strong>1987</strong> — <a href="#the-baltic-incident">The Baltic Incident</a> — a US sabotage raid on a Soviet <a class="tl" href="#glossary--psychotronics">psychotronics</a> shipment breached a psionically reactive, self-replicating substance in the Baltic Sea; months of covert cleanup, covered as an oil spill. Forced the founding of <a href="#jdit">JDIT</a>.</li>
+<li><strong>1987</strong> — <a href="#the-founding-of-jdit">The Founding of JDIT</a> — the negotiated aftermath of <a href="#the-baltic-incident">The Baltic Incident</a>: a covert UN agency, US-tilted, absorbing both Cold War psi archives; <a href="#anscom">ANSCOM</a> born with it.</li>
+</ul>
+</section>
 <section class="note" id="world-bible"><div class="eyebrow">Overview</div><h2>World Bible — Signal to Noise</h2>
 <p>Canonical worldbuilding decisions, one section per stage of <span class="stub" title="not included in this dossier">core-questionnaire</span> (plus whatever the genre/system modules add). Each entry cites the session where it was decided (<code>decided in [[S###-…]]</code>). If a session note and this file disagree, fix whichever is wrong — then tell the <code>lorekeeper</code>. Player-safe summaries get copied to Handouts; this file never leaves the GM screen.</p>
 <h3 id="world-bible--table-contract-stage-0">Table contract (Stage 0)</h3>
@@ -146,11 +182,11 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <h3 id="world-bible--timeline-stage-3">Timeline (Stage 3)</h3>
 <div class="twrap"><table>
 <tr><th>Year</th><th>Turning point</th><th>Commoner version</th><th>Ruler version</th><th>Specialist version</th></tr>
-<tr><td>deep time</td><td><span class="stub" title="not included in this dossier">The <a class="tl" href="#glossary--the-fall">Fall</a></span> — <a href="#006-the-gardener-fell-in-deep-time">006-the-gardener-fell-in-deep-time</a></td><td>— (no memory)</td><td>—</td><td>(GM only; unknown even to CANOPY-read researchers)</td></tr>
+<tr><td>deep time</td><td><a href="#the-fall">The Fall</a> — <a href="#006-the-gardener-fell-in-deep-time">006-the-gardener-fell-in-deep-time</a></td><td>— (no memory)</td><td>—</td><td>(GM only; unknown even to CANOPY-read researchers)</td></tr>
 <tr><td>millennia</td><td>Cultivation era — real oracles/witches/saints (<a href="#004-ancient-cultivation-modern-bloom">004-ancient-cultivation-modern-bloom</a>)</td><td>folk beliefs, garbled truth</td><td>superstition managed</td><td>CANOPY-read specialists: historical cases partly genuine</td></tr>
 <tr><td>c. 1900→</td><td>The bloom — psi incidents rising</td><td>(unnoticed)</td><td>(unnoticed)</td><td>20th-century curve in retrospect</td></tr>
-<tr><td>1986</td><td>Chernobyl — <span class="stub" title="not included in this dossier">The Subject 357 Case</span>: a latent's tumors secrete the <a class="tl" href="#glossary--the-substance">substance</a> (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>, <a href="#subject-357">Subject 357</a>)</td><td>the reactor disaster</td><td>the reactor disaster</td><td>Soviet psi division's incurable patient; posthumous material enters the 1987 shipment</td></tr>
-<tr><td>1987</td><td><span class="stub" title="not included in this dossier">The <a class="tl" href="#glossary--the-baltic-incident">Baltic Incident</a></span> → <a href="#jdit">JDIT</a> founded (<span class="stub" title="not included in this dossier">The Founding of JDIT</span>, <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>)</td><td>oil spill</td><td>US sabotage op gone wrong; UN initiative born</td><td>psionically reactive bio-substance, self-replicating; hotspot persists</td></tr>
+<tr><td>1986</td><td>Chernobyl — <a href="#the-subject-357-case">The Subject 357 Case</a>: a latent's tumors secrete the <a class="tl" href="#glossary--the-substance">substance</a> (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>, <a href="#subject-357">Subject 357</a>)</td><td>the reactor disaster</td><td>the reactor disaster</td><td>Soviet psi division's incurable patient; posthumous material enters the 1987 shipment</td></tr>
+<tr><td>1987</td><td><a href="#the-baltic-incident">The Baltic Incident</a> → <a href="#jdit">JDIT</a> founded (<a href="#the-founding-of-jdit">The Founding of JDIT</a>, <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>)</td><td>oil spill</td><td>US sabotage op gone wrong; UN initiative born</td><td>psionically reactive bio-substance, self-replicating; hotspot persists</td></tr>
 <tr><td>c. 1850–1910</td><td>Séance craze = first mass contact with the Undertow (<a href="#009-the-undertow-is-peopled">009-the-undertow-is-peopled</a>)</td><td>spiritualism fad, debunked</td><td>fraud epidemic, managed</td><td>some circles touched the Undertow; things looked back; haunted sites + "things that never left" persist</td></tr>
 <tr><td>c. 1950–87</td><td>Cold War psi programs, both duped: 95% fraud hiding 5% gold — a few genuine receivers and finds neither side understood (the Baltic substance among them)</td><td>(unknown)</td><td>psychic spies rumored, denied</td><td>archives absorbed by JDIT minus what each side kept</td></tr>
 <tr><td>1987→</td><td><a href="#anscom">ANSCOM</a> born with JDIT; ~decades of quiet routine, last ~10 years caseload climbing (the bloom's visible face)</td><td>(n/a — ANSCOM unknown)</td><td>a dull UN initiative</td><td>offices understaffed, veterans muttering that something changed; PCs join during the strain</td></tr>
@@ -209,7 +245,7 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <h4 id="glossary--deadwood">DEADWOOD</h4>
 <p>Compartment designation for ANSCOM's secret internal investigation and elimination squad — the unit that brings down dangerous or rogue agents (<a href="#anscom">ANSCOM</a>, canon 028). Most of JDIT does not know the compartment or the squad exists. Written in caps, always. Where the field knows of it at all — as rumor — it whispers <strong>"the Janitors."</strong> <em>Coordinates: post-'87 JDIT compartment codeword, arboreal series (see CANOPY): dead wood is what a healthy forest sheds — and corporate idiom for personnel to be cut. The whisper extends "a Casa": every house has its cleaners. PT (table speech): codeword kept English; whisper <strong>"os Faxineiros"</strong> — "faxina" already carries the cleanup-detail sense. Confirmed 2026-08-25 (two-register pass).</em> <em>Avoid</em>: "internal affairs", "the hit squad"</p>
 <h4 id="glossary--the-baltic-incident">The Baltic Incident</h4>
-<p>The 1987 event in the Baltic that forced the founding of <a href="#jdit">JDIT</a> (<a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>). Event note: <span class="stub" title="not included in this dossier">The Baltic Incident</span>. See <a href="#baltic-hotspot">Baltic Hotspot</a>. <em>Main name confirmed 2026-08-25 (un-glossary'd sweep). Alternative names — official euphemisms, field nicknames — to be coined later for flavor (queued, <span class="stub" title="not included in this dossier">Open Threads</span>).</em></p>
+<p>The 1987 event in the Baltic that forced the founding of <a href="#jdit">JDIT</a> (<a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>). Event note: <a href="#the-baltic-incident">The Baltic Incident</a>. See <a href="#baltic-hotspot">Baltic Hotspot</a>. <em>Main name confirmed 2026-08-25 (un-glossary'd sweep). Alternative names — official euphemisms, field nicknames — to be coined later for flavor (queued, <span class="stub" title="not included in this dossier">Open Threads</span>).</em></p>
 <h4 id="glossary--flying-squad">Flying squad</h4>
 <p>A mobile ANSCOM field team working a circuit rather than a station — the PCs' unit type: a Europe circuit from the <a href="#vienna">Vienna</a> hub. <em><strong>Provisional</strong> (2026-08-25, GM triage): ANSCOM squad typing, functions, and the associated terminology are queued (<span class="stub" title="not included in this dossier">Open Threads</span>). PT (table speech): <strong>"esquadrão volante"</strong> (provisional form, pending table check).</em></p>
 <h3 id="glossary--field-jargon-anscom-register">Field jargon (ANSCOM register)</h3>
@@ -285,7 +321,7 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <h4 id="glossary--uber-technique">Uber-technique</h4>
 <p>The -30 impossible-tier techniques (<a href="#030-the-impossible-tier-is-real">030-the-impossible-tier-is-real</a>). <em>Notes-level (rules-side shorthand), confirmed 2026-08-25. <strong>No in-world term by ruling</strong> — the tier is unknown in-game, so nobody has a word for it.</em></p>
 <h4 id="glossary--the-fall">The Fall</h4>
-<p>The Gardener's arrival on Earth in deep time — it was cast down, not landed (<a href="#006-the-gardener-fell-in-deep-time">006-the-gardener-fell-in-deep-time</a>). Stub note: <span class="stub" title="not included in this dossier">The Fall</span>; detailing queued (<span class="stub" title="not included in this dossier">Open Threads</span>). <em>Notes-level, sanctioned 2026-08-25 (GM triage).</em></p>
+<p>The Gardener's arrival on Earth in deep time — it was cast down, not landed (<a href="#006-the-gardener-fell-in-deep-time">006-the-gardener-fell-in-deep-time</a>). Stub note: <a href="#the-fall">The Fall</a>; detailing queued (<span class="stub" title="not included in this dossier">Open Threads</span>). <em>Notes-level, sanctioned 2026-08-25 (GM triage).</em></p>
 <h4 id="glossary--seed-cult">Seed cult</h4>
 <p>A human group grown around a buried seed's influence — serving or venerating it, knowingly or not. <em>Notes-level, sanctioned 2026-08-25 (GM triage).</em></p>
 <h4 id="glossary--wavelength">Wavelength</h4>
@@ -294,6 +330,361 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <ul>
 <li><strong>"Signal"</strong> — two layers (amended 2026-08-24, supersedes the 2026-08-22 ruling). ANSCOM's theory that psi <em>powers</em> are received stays wrong: powers are cultivated biology (<a href="#002-psi-is-the-gardeners-cultivation">002-psi-is-the-gardeners-cultivation</a>). But the <strong>corruption channel genuinely is a transmission</strong>: the Gardener broadcasts, the corrupted receive — and now emit (<a href="#025-corruption-is-openness">025-corruption-is-openness</a>). The cultivation's object <em>is</em> receivers for its signal; the signal always existed, what was scarce was ears. ANSCOM named itself for a wrong theory that happens to describe exactly what is eating its agents. GM notes may use signal language for the corruption channel — never for ability genesis.</li>
 <li><del><strong>"Receiver" etymology</strong></del> — <strong>RESOLVED 2026-08-25</strong> (two-register pass): the toy is canon — minted in the Cold War Soviet program ("priëmnik") during the weak era; details in the <strong>Receiver</strong> entry's coordinates above.</li>
+</ul>
+</section><section class="note" id="the-baltic-incident"><div class="eyebrow">Event file</div><h2>The Baltic Incident</h2>
+<p class="lede">1987 — a US sabotage raid on a Soviet <a class="tl" href="#glossary--psychotronics">psychotronics</a> shipment breached a psionically reactive, self-replicating <a class="tl" href="#glossary--the-substance">substance</a> in the Baltic Sea; months of covert cleanup, covered as an oil spill. Forced the founding of <a href="#jdit">JDIT</a>.</p>
+<p>Canonical ruling: <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>. Glossary entry: <a href="#glossary--the-baltic-incident">The Baltic Incident</a> (main name confirmed; flavor variants queued in <span class="stub" title="not included in this dossier">Open Threads</span>).</p>
+<h3 id="the-baltic-incident--what-happened">What happened</h3>
+<p>A Soviet shipment of crude psychotronic tech, in transit on the Baltic Sea, was sabotaged by a US operations team. Among the cargo was an experimental biological substance, psionically reactive — posthumous material from <a href="#subject-357">Subject 357</a> (<a href="#the-subject-357-case">The Subject 357 Case</a>). The raid breached it; the substance leaked and began self-reproducing by consuming marine biological matter. Containment and cleanup succeeded but took months.</p>
+<h3 id="the-baltic-incident--public-version">Public version</h3>
+<p>Three versions circulate (<a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>):</p>
+<ul>
+<li><strong>Commoner:</strong> a bad tanker spill in the Baltic in '87; fishing ruined for a couple of seasons.</li>
+<li><strong>Ruler (national governments, not CANOPY-read):</strong> a US sabotage op against Soviet weapons tech went wrong; classified environmental damage; the fallout quietly midwifed a UN defense initiative.</li>
+<li><strong>Specialist (CANOPY-read):</strong> the substance was psionically reactive and self-replicating; cleanup took months and some phenomena never fully stopped. What it <em>was</em> and where the Soviets got it — still restricted, still argued about.</li>
+</ul>
+<h3 id="the-baltic-incident--involved">Involved</h3>
+<ul>
+<li> — the US operations team (unkeyed)</li>
+<li>The Soviet psi division (name TBD — <span class="stub" title="not included in this dossier">Open Threads</span>)</li>
+<li>1987 cleanup personnel — aging, scattered, some talkative</li>
+<li><a href="#subject-357">Subject 357</a> — posthumous source of the substance</li>
+</ul>
+<h3 id="the-baltic-incident--where">Where</h3>
+<ul>
+<li><a href="#baltic-hotspot">Baltic Hotspot</a> — the zone remains a standing weird-phenomena generator</li>
+</ul>
+<h3 id="the-baltic-incident--fallout">Fallout</h3>
+<ul>
+<li><a href="#jdit">JDIT</a> founded, with <a href="#anscom">ANSCOM</a> (<a href="#the-founding-of-jdit">The Founding of JDIT</a>)</li>
+<li>The hotspot persists; officially decommissioned buoys someone still maintains</li>
+<li>Sealed cleanup archives (location TBD); surviving samples — officially none</li>
+</ul>
+<h3 id="the-baltic-incident--hooks">Hooks</h3>
+<ul>
+<li>A hotspot case that matches 1987 cleanup signatures; a dying cleanup veteran; Soviet-era archives surfacing through the parallel-program rumor mill (<a href="#003-jdit-keeps-the-field-clear">003-jdit-keeps-the-field-clear</a>)</li>
+</ul>
+<h3 id="the-baltic-incident--secrets-gm-only">Secrets (GM only)</h3>
+<ul>
+<li>The substance is human-derived (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>) — whatever self-reproduced in the Baltic is kin to every <a class="tl" href="#glossary--receiver">receiver</a> in the world.</li>
+<li>"Cleanup was successful" is an official phrase, not a fact — Baltic <a class="tl" href="#glossary--residue">residue</a> is a deliberate ambiguity (<span class="stub" title="not included in this dossier">Open Threads</span>); do not resolve casually.</li>
+</ul>
+<h3 id="the-baltic-incident--timeline">Timeline</h3>
+<ul>
+<li>(not yet in play)</li>
+</ul>
+</section><section class="note" id="the-fall"><div class="eyebrow">Event file</div><h2>The Fall</h2>
+<p class="lede">The <a class="tl" href="#glossary--the-gardener">Gardener</a>'s arrival on Earth in deep time — cast down, not landed. Stub; detailing queued.</p>
+<p><strong>Stub</strong> — sanctioned as a notes-level term 2026-08-25 (<a href="#glossary--the-fall">The Fall</a>); detailing queued in <span class="stub" title="not included in this dossier">Open Threads</span>.</p>
+<h3 id="the-fall--what-is-canon">What is canon</h3>
+<ul>
+<li><a href="#the-gardener">The Gardener</a> was <strong>cast to Earth in deep time</strong> — a <a class="tl" href="#glossary--the-fall">fall</a>, not an arrival by choice (<a href="#006-the-gardener-fell-in-deep-time">006-the-gardener-fell-in-deep-time</a>).</li>
+<li>Its driving register carries <strong>anger and revenge</strong> (<a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a>); what it was cast <em>from</em>, and by whom, is the "Gardener's elsewhere" deliberate ambiguity (<span class="stub" title="not included in this dossier">Open Threads</span> — spend, don't tidy).</li>
+</ul>
+<h3 id="the-fall--open-questions-to-detail-later">Open questions (to detail later)</h3>
+<ul>
+<li>Did the Fall leave <strong>craters</strong> — physical scars findable today?</li>
+<li>Are the <strong>places of the Fall significant</strong> in any way (<a class="tl" href="#glossary--seed">seed</a> grounds, <a class="tl" href="#glossary--hot">hot</a> zones, <a class="tl" href="#glossary--lineage">lineage</a> cradles)?</li>
+<li>Was the Fall <strong>literal</strong> — from space — or a <strong>casting from somewhere deeper in the <a class="tl" href="#glossary--the-undertow">Undertow</a></strong>, with the material world as the shore it washed up on?</li>
+</ul>
+</section><section class="note" id="the-founding-of-jdit"><div class="eyebrow">Event file</div><h2>The Founding of JDIT</h2>
+<p class="lede">1987 — the negotiated aftermath of <a href="#the-baltic-incident">The Baltic Incident</a>: a covert UN agency, US-tilted, absorbing both Cold War psi archives; <a href="#anscom">ANSCOM</a> born with it.</p>
+<p>Canonical ruling: <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a> (§The founding). Org detail lives in the faction notes — this note records the founding as an occurrence.</p>
+<h3 id="the-founding-of-jdit--what-happened">What happened</h3>
+<p>At the Cold War's end, the US pushed to terminate the USSR's psionics research and operations. The negotiated compromise after <a href="#the-baltic-incident">The Baltic Incident</a>: a covert agency under the UN umbrella — where the US holds much greater control and say — which a weakened USSR judged better than an all-out shadow war. That agency is <a href="#jdit">JDIT</a>; <a href="#anscom">ANSCOM</a> was born with it. The US (and later China) refused the clause forbidding independent national initiatives (<a href="#003-jdit-keeps-the-field-clear">003-jdit-keeps-the-field-clear</a>) — the power that caused the Incident kept its own options open while closing everyone else's.</p>
+<p>Both blocs' psi archives were absorbed — minus what each side kept (<a href="#world-bible">World Bible</a> §Timeline). The merged lexicon and the <a class="tl" href="#glossary--berger-scale">Berger scale</a>'s adoption as standard date to this ('87) consolidation (<a href="#glossary">GLOSSARY</a>; <a href="#013-the-berger-scale">013-the-berger-scale</a>).</p>
+<h3 id="the-founding-of-jdit--public-version">Public version</h3>
+<ul>
+<li><strong>Commoner:</strong> <a class="tl" href="#glossary--jdit">JDIT</a> is unknown or a do-nothing UN defense initiative.</li>
+<li><strong>Ruler:</strong> a dull UN initiative born of quiet diplomatic fallout.</li>
+<li><strong>Specialist (CANOPY-read):</strong> the founding compromise and its US tilt; the refused parallel-programs clause is known and rumored about.</li>
+</ul>
+<h3 id="the-founding-of-jdit--involved">Involved</h3>
+<ul>
+<li><a href="#jdit">JDIT</a>, <a href="#anscom">ANSCOM</a></li>
+<li>US and Soviet negotiators (unkeyed); the absorbed Cold War programs</li>
+</ul>
+<h3 id="the-founding-of-jdit--where">Where</h3>
+<ul>
+<li>(negotiation venue unkeyed)</li>
+</ul>
+<h3 id="the-founding-of-jdit--fallout">Fallout</h3>
+<ul>
+<li>JDIT's DNA: born of superpower guilt and leverage, tilted toward US influence, allergic to biological psi-materials</li>
+<li>~Decades of quiet routine; the last ~10 years of climbing caseload — the <a class="tl" href="#glossary--the-bloom">bloom</a>'s visible face; the PCs join during the strain</li>
+<li>Parallel national programs (US, China) rumored, unconfirmed — the unconfirmed status is the canon (<span class="stub" title="not included in this dossier">Open Threads</span>)</li>
+</ul>
+<h3 id="the-founding-of-jdit--hooks">Hooks</h3>
+<ul>
+<li>Clearance-climb reveals; what each side kept out of the merged archives; old hands who remember the pre-'87 traditions</li>
+</ul>
+<h3 id="the-founding-of-jdit--secrets-gm-only">Secrets (GM only)</h3>
+<ul>
+<li>The founding archive sits above the PCs' clearance at start (<a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>).</li>
+</ul>
+<h3 id="the-founding-of-jdit--timeline">Timeline</h3>
+<ul>
+<li>(not yet in play)</li>
+</ul>
+</section><section class="note" id="the-subject-357-case"><div class="eyebrow">Event file</div><h2>The Subject 357 Case</h2>
+<p class="lede">1986–87 — a Chernobyl containment worker's tumors secreted a psionically reactive <a class="tl" href="#glossary--the-substance">substance</a>; the Soviet psi division's incurable patient died, and the posthumous material entered the shipment breached in <a href="#the-baltic-incident">The Baltic Incident</a>.</p>
+<p>Canonical ruling: <a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>. The person: <a href="#subject-357">Subject 357</a>.</p>
+<h3 id="the-subject-357-case--what-happened">What happened</h3>
+<p><a href="#subject-357">Subject 357</a>, a tumor-ridden Soviet <a class="tl" href="#glossary--latent">latent</a> psi working the Chernobyl containment (1986), came to the Soviet psi division's attention when strange phenomena began manifesting around them. The tumors were incurable. When physicians catheterized what imaging showed as an internal blood pocket, what they extracted was not blood but the substance — testing revealed it psionically reactive. The patient died in 1986–87; posthumous material entered the 1987 shipment sabotaged in <a href="#the-baltic-incident">The Baltic Incident</a>.</p>
+<h3 id="the-subject-357-case--public-version">Public version</h3>
+<p>None — the case never existed publicly. Fragments survive only in inherited Soviet records; even most CANOPY-read specialists know only that the substance's origin is "still restricted, still argued about" (<a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>).</p>
+<h3 id="the-subject-357-case--involved">Involved</h3>
+<ul>
+<li><a href="#subject-357">Subject 357</a> — the patient</li>
+<li>The Soviet psi division (name TBD) and its case doctors (undefined — <span class="stub" title="not included in this dossier">Open Threads</span>)</li>
+</ul>
+<h3 id="the-subject-357-case--where">Where</h3>
+<ul>
+<li>Chernobyl containment zone; the division's facility (unkeyed)</li>
+</ul>
+<h3 id="the-subject-357-case--fallout">Fallout</h3>
+<ul>
+<li>The substance exists — human-derived, grown by a latent's body (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>)</li>
+<li>Chernobyl gains a shadow: a canonical connection between the 20th century's most famous disaster and the psi world — usable, but rationed</li>
+<li>Live investigative threads: Subject 357's <a class="tl" href="#glossary--lineage">lineage</a>, surviving relatives, the division's case doctors, the archive's fate</li>
+</ul>
+<h3 id="the-subject-357-case--hooks">Hooks</h3>
+<ul>
+<li>Inherited Soviet archives; the Baltic file's redacted annexes; surviving case personnel; a hotspot phenomenon that behaves like a person</li>
+</ul>
+<h3 id="the-subject-357-case--secrets-gm-only">Secrets (GM only)</h3>
+<ul>
+<li>Whether radiation interacted with latency to produce the tumors and the secretion is a deliberate ambiguity (<span class="stub" title="not included in this dossier">Open Threads</span>) — spend, don't tidy.</li>
+<li>Which selected lineage Subject 357 belonged to — and whether <a href="#the-gardener">The Gardener</a> noticed what their body did — undefined.</li>
+</ul>
+<h3 id="the-subject-357-case--timeline">Timeline</h3>
+<ul>
+<li>(not yet in play)</li>
+</ul>
+</section><section class="note" id="anscom"><div class="eyebrow">Faction file</div><h2>ANSCOM</h2>
+<p class="lede">Anomalous Signals Command, <a href="#jdit">JDIT</a>'s operations arm — the outfit the PCs work for, containing liminic events case by case.</p>
+<h3 id="anscom--agenda">Agenda</h3>
+<ul>
+<li><strong>Public face:</strong> none; <a class="tl" href="#glossary--anscom">ANSCOM</a> does not publicly exist.</li>
+<li><strong>True goal:</strong> detect, contain, and close liminic events; manage <a class="tl" href="#glossary--receiver">receivers</a> before they go loud.</li>
+<li><strong>Current move:</strong> working a case queue that has climbed year over year for a decade — understaffed, stretched, veterans muttering that something changed. It has not connected the curve to a cause (<a href="#002-psi-is-the-gardeners-cultivation">002-psi-is-the-gardeners-cultivation</a>, <a href="#010-the-gardener-thinks-through-receivers">010-the-gardener-thinks-through-receivers</a>).</li>
+</ul>
+<h3 id="anscom--members">Members</h3>
+<ul>
+<li> — the PCs' handler / case officer (to be created)</li>
+<li>The PC field team</li>
+</ul>
+<h3 id="anscom--assets-territory">Assets &amp; territory</h3>
+<ul>
+<li>Field teams, detection apparatus, the <a class="tl" href="#glossary--canopy">CANOPY</a> archive of closed cases.</li>
+<li>Universal body-collection doctrine for fallen operatives — and, far above field clearance, the brain-salvage amplifier it feeds (<a href="#014-anscom-salvages-its-dead">014-anscom-salvages-its-dead</a>).</li>
+<li><strong>The exit protocol:</strong> a mandatory liminosome-disabling injection is the only retirement ANSCOM formally allows — leavers walk out diminished and psi-dead (<a href="#023-retirement-is-a-needle">023-retirement-is-a-needle</a>).</li>
+<li><strong>Silence training:</strong> all personnel — psis and mundanes alike — are trained out of the universal thought-broadcast (<a href="#027-everyone-is-broadcasting">027-everyone-is-broadcasting</a>). For recruits who manifested young, the gift of quiet is the org's first kindness; ANSCOM uses the gratitude to sell itself as caring for its people.</li>
+<li><strong>Anti-psi personnel, two tiers</strong> (<a href="#028-the-closed-list">028-the-closed-list</a>): rare unattached anti-psi agents, assigned to squads when a powerful psionic threat is expected; and a <strong>secret internal investigation/elimination squad</strong> that brings down dangerous or rogue agents — most of <a href="#jdit">JDIT</a> does not know the agent-killing squad exists. Named 2026-08-25 (two-register pass): compartment designation <strong><a class="tl" href="#glossary--deadwood">DEADWOOD</a></strong> (arboreal series with CANOPY); field whisper <strong>"the Janitors" / "os Faxineiros"</strong> (<a href="#glossary--deadwood">DEADWOOD</a>).</li>
+<li><strong>Exposure doctrine (ruled 2026-08-24, <span class="stub" title="not included in this dossier">S000-worldbuilding-options</span>):</strong> an agent whose psi nature is publicly revealed is burned — ANSCOM itself becomes the hunter, with the elimination squad and anti-psi assets on the case, relentlessly (Enemy at 15 or less). The character is effectively finished unless the rest of the squad defects with them. Mechanically: every PC carries <strong>Secret (Psi) [-30]</strong> — the "Possible Death / hunted man" tier.</li>
+</ul>
+<h3 id="anscom--relations">Relations</h3>
+<ul>
+<li><a href="#jdit">JDIT</a> — parent organization; ANSCOM has been its operations arm since the 1987 founding (<a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>)</li>
+<li><a href="#the-gardener">The Gardener</a> — double bind: hunting slows it, growing feeds it (<a href="#017-anscom-feeds-what-it-fights">017-anscom-feeds-what-it-fights</a>); corrupted individuals already embedded (extent undefined — <a href="#the-blight">The Blight</a>)</li>
+</ul>
+<h3 id="anscom--clock">Clock</h3>
+<p>Progress toward their goal; advance when sessions give them room to act.</p>
+<ul>
+<li>(define with the opening arc)</li>
+</ul>
+</section><section class="note" id="jdit"><div class="eyebrow">Faction file</div><h2>JDIT</h2>
+<p class="lede">The Joint Directorate for Irregular Threats — the treaty organization that owns the psionics secret and suppresses every rival that gets big enough to notice.</p>
+<h3 id="jdit--agenda">Agenda</h3>
+<ul>
+<li><strong>Public face:</strong> a boring, minor international defense initiative that does nothing concrete.</li>
+<li><strong>True goal:</strong> contain psionic phenomena and keep <span class="stub" title="not included in this dossier"><a class="tl" href="#glossary--canopy">CANOPY</a></span> sealed, worldwide.</li>
+<li><strong>Current move:</strong> hunting any minor org that grows big enough to show on its radar — eliminated or driven back underground.</li>
+</ul>
+<h3 id="jdit--members">Members</h3>
+<ul>
+<li><a href="#anscom">ANSCOM</a> — operations arm</li>
+<li> — director / political leadership (to be created)</li>
+</ul>
+<h3 id="jdit--assets-territory">Assets &amp; territory</h3>
+<ul>
+<li>The <a class="tl" href="#glossary--jdit">JDIT</a> convention: most states are signatories. The US and China refused the clause forbidding independent national initiatives (<a href="#003-jdit-keeps-the-field-clear">003-jdit-keeps-the-field-clear</a>).</li>
+</ul>
+<h3 id="jdit--relations">Relations</h3>
+<ul>
+<li><a href="#anscom">ANSCOM</a> — subordinate arm</li>
+<li>Rumored parallel national programs (US, China) — unconfirmed; see <a href="#003-jdit-keeps-the-field-clear">003-jdit-keeps-the-field-clear</a></li>
+</ul>
+<h3 id="jdit--clock">Clock</h3>
+<p>Progress toward their goal; advance when sessions give them room to act.</p>
+<ul>
+<li>(define when the first case establishes what JDIT is currently pushing)</li>
+</ul>
+</section><section class="note" id="the-gardener"><div class="eyebrow">Faction file</div><h2>The Gardener</h2>
+<p class="lede">A Lovecraftian entity cast to Earth millions of years ago, semi-awakened, cultivating psionic humanity as <a class="tl" href="#glossary--vessel">vessels</a> for its kind — one mind expressed through buried <a class="tl" href="#glossary--seed">seeds</a> worldwide (<a href="#006-the-gardener-fell-in-deep-time">006-the-gardener-fell-in-deep-time</a>).</p>
+<h3 id="the-gardener--agenda">Agenda</h3>
+<ul>
+<li><strong>Public face:</strong> none. Nothing on Earth knows it exists — including <a href="#jdit">JDIT</a> and <a href="#anscom">ANSCOM</a>.</li>
+<li><strong>Nature:</strong> half-awake primal cognition; intent real but erratic and unfocused; cultivation instinctual — whisper-and-seep fitness amplification of the <a class="tl" href="#glossary--receiver">receivers</a> it can sense, who shine distinctly in the <a class="tl" href="#glossary--the-undertow">Undertow</a> while mundane minds stay dim (<a href="#015-the-gardener-is-primal">015-the-gardener-is-primal</a>).</li>
+<li><strong>True goal:</strong> grow enough potent receivers to serve as the neurons of its fully instantiated mind — and as vessels for its kind (<a href="#002-psi-is-the-gardeners-cultivation">002-psi-is-the-gardeners-cultivation</a>, <a href="#010-the-gardener-thinks-through-receivers">010-the-gardener-thinks-through-receivers</a>).</li>
+<li><strong>Current move:</strong> stirring. The 20th-century <a class="tl" href="#glossary--the-bloom">bloom</a> is the <a class="tl" href="#glossary--substrate">substrate</a> approaching threshold — its brief moments of coalesced consciousness in the Undertow are growing longer and more deliberate.</li>
+</ul>
+<h3 id="the-gardener--members">Members</h3>
+<ul>
+<li>Its seeds — breeding instruments, buried worldwide; placed on the map as cases uncover them</li>
+<li>The selected <a class="tl" href="#glossary--lineage">lineages</a> (none named yet)</li>
+</ul>
+<h3 id="the-gardener--assets-territory">Assets &amp; territory</h3>
+<ul>
+<li>Multiple seeds, buried or hidden worldwide; each nudges pairings, dreams, and migrations of carrier lineages within its reach.</li>
+</ul>
+<h3 id="the-gardener--relations">Relations</h3>
+<ul>
+<li><a href="#anscom">ANSCOM</a> — unknowing antagonist AND unknowing supplier: containment prunes the crop, but recruitment and psi-tech experimentation grow it (<a href="#017-anscom-feeds-what-it-fights">017-anscom-feeds-what-it-fights</a>); it has hands inside (<a href="#the-blight">The Blight</a>).</li>
+</ul>
+<ul>
+<li><strong>Drive:</strong> anger and revenge, for now — cooling toward cold calculation as it strengthens; its <a class="tl" href="#glossary--thrall">thralls</a> inherit its current mood (violence signature) (<a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a>).</li>
+</ul>
+<h3 id="the-gardener--clock">Clock</h3>
+<p>Progress toward their goal; advance when sessions give them room to act. Sophistication scales with corrupted-psi count (<a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a>):</p>
+<ul>
+<li>a seed becomes active enough to force-grow a strong receiver</li>
+<li>instinctive flicker → tactical cunning (first coordinated case)</li>
+<li>tactical cunning → strategy (multi-case plans, cooling anger)</li>
+<li>strategy → open mastery (endgame; presumably never reached)</li>
+</ul>
+</section><section class="note" id="the-blight"><div class="eyebrow">Arc file</div><h2>The Blight</h2>
+<h3 id="the-blight--premise">Premise</h3>
+<p>Corrupted sleeper agents operate inside <a href="#anscom">ANSCOM</a> itself (<a href="#017-anscom-feeds-what-it-fights">017-anscom-feeds-what-it-fights</a>) — <strong>not an organized cell</strong>: the <a class="tl" href="#glossary--the-gardener">Gardener</a> isn't yet cognitively capable of running one (<a href="#015-the-gardener-is-primal">015-the-gardener-is-primal</a>). They are independent sleepers whose tuning makes the entity's primal wants their own, unconsciously (<a href="#025-corruption-is-openness">025-corruption-is-openness</a>); their actions converge without coordination, and from outside, convergence is indistinguishable from conspiracy. The PCs must uproot the rot — inside the one organization whose job is to notice exactly this, and which therefore cannot admit it happened.</p>
+<h3 id="the-blight--stakes">Stakes</h3>
+<p>Left alone, the sleepers steer cases: containments that fail on schedule, strong rogues who slip away, salvage-eligible bodies that reach the amplifier program (<a href="#014-anscom-salvages-its-dead">014-anscom-salvages-its-dead</a>). The Gardener gains eyes and hands inside its hunter — and every month the rot runs, the <a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a> clock ticks faster.</p>
+<h3 id="the-blight--key-entities">Key entities</h3>
+<ul>
+<li><a href="#anscom">ANSCOM</a> — host and battlefield</li>
+<li><a href="#the-gardener">The Gardener</a> — the quiet author</li>
+<li> — the sleepers (undefined; at least one senior enough to touch case routing or the amplifier's operator pool; prime profile: the rare <strong>receive-only corrupted</strong> — tuned to it but emitting nothing, invisible to the emission channel, so their entire exposure risk is behavioral (<a href="#025-corruption-is-openness">025-corruption-is-openness</a>))</li>
+<li> — the first loose thread (a case that failed too precisely)</li>
+</ul>
+<h3 id="the-blight--beats">Beats</h3>
+<p>Planned or emergent structure — mark what has fired.</p>
+<ul>
+<li>a case fails in a way only an insider could arrange</li>
+<li>the tension to resolve when fleshing out: early-era corrupted trend violent (<a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a>) — how do sleepers <em>last</em> inside <a class="tl" href="#glossary--anscom">ANSCOM</a>? (Candidate: most don't — the erratic get removed as misbehavers, and the dread is the pattern in that churn; the ones who endure are the rare calm ones — an early, quiet foreshadowing of the Gardener's cooling)</li>
+<li>internal investigation with no safe allies — monitoring (<a href="#012-power-estranges">012-power-estranges</a>) cuts both ways</li>
+<li>the uprooting — and the question of what ANSCOM does with corrupted colleagues it cannot admit existed</li>
+</ul>
+<h3 id="the-blight--timeline">Timeline</h3>
+<ul>
+<li>(not yet in play)</li>
+</ul>
+<h3 id="the-blight--resolution">Resolution</h3>
+<p><em>Fill when status becomes <code>resolved</code>.</em></p>
+</section><section class="note" id="baltic-hotspot"><div class="eyebrow">Location file</div><h2>Baltic Hotspot</h2>
+<p class="lede">The stretch of the Baltic Sea poisoned by <a href="#the-baltic-incident">The Baltic Incident</a> (1987, <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>) — officially an old oil-spill zone, actually Europe's most reliable generator of weird phenomena.</p>
+<h3 id="baltic-hotspot--sensory-sketch">Sensory sketch</h3>
+<ul>
+<li>Grey water that goes glass-still when nothing else does; charter captains who won't take certain headings and won't say why.</li>
+<li>Officially decommissioned monitoring buoys that someone still maintains.</li>
+</ul>
+<h3 id="baltic-hotspot--who-s-here">Who's here</h3>
+<ul>
+<li> — whoever <a class="tl" href="#glossary--anscom">ANSCOM</a> keeps watching the zone (to be created)</li>
+<li>Aging 1987 cleanup veterans, scattered around the rim states</li>
+</ul>
+<h3 id="baltic-hotspot--points-of-interest">Points of interest</h3>
+<ul>
+<li>The exclusion coordinates (never formally published, universally known to local mariners)</li>
+<li>Sealed cleanup archives (location TBD)</li>
+</ul>
+<h3 id="baltic-hotspot--hooks">Hooks</h3>
+<ul>
+<li>Phenomena reports that match no <a class="tl" href="#glossary--lineage">lineage</a> — <a class="tl" href="#glossary--noise">noises</a> with no <a class="tl" href="#glossary--receiver">receiver</a> (<a href="#007-sixty-thousand-receivers-suspected-world">007-sixty-thousand-receivers-suspected-world</a> makes those anomalous).</li>
+<li>What did the <a class="tl" href="#glossary--the-substance">substance</a> leave on the seabed? Nobody has looked in decades.</li>
+</ul>
+<h3 id="baltic-hotspot--secrets-gm-only">Secrets (GM only)</h3>
+<ul>
+<li>The substance's origin is resolved canon: human-derived, secreted by <a href="#subject-357">Subject 357</a> (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>, <a href="#the-subject-357-case">The Subject 357 Case</a>).</li>
+<li>Residual self-reproducing traces may persist ("cleanup was successful" is an official phrase, not a fact).</li>
+</ul>
+</section><section class="note" id="vienna"><div class="eyebrow">Location file</div><h2>Vienna</h2>
+<p class="lede">Hub city of the PCs' <a href="#anscom">ANSCOM</a> continental circuit — a UN city where <a href="#jdit">JDIT</a>'s dull-treaty camouflage is invisible, layered over empires, Cold War listening posts, and old-world occult societies.</p>
+<h3 id="vienna--sensory-sketch">Sensory sketch</h3>
+<ul>
+<li>Trams hissing through Ringstrasse drizzle; embassy plates on every third parked car.</li>
+<li>Coffeehouse marble and cigarette-yellowed ceilings where three empires' secrets were traded; the waiter never hurries you.</li>
+<li>The UN complex's international zone: flags, glass, and corridors of people whose job titles mean nothing on purpose.</li>
+</ul>
+<h3 id="vienna--who-s-here">Who's here</h3>
+<ul>
+<li> — the PCs' <a class="tl" href="#glossary--anscom">ANSCOM</a> case officer / handler (to be created)</li>
+<li> — hub office staff (lab, archive, quartermaster — to be created)</li>
+</ul>
+<h3 id="vienna--points-of-interest">Points of interest</h3>
+<ul>
+<li>The ANSCOM hub office (cover identity and premises to be keyed — Stage 5 anchor work)</li>
+<li>Vienna International Airport — the gate to every case on the continent</li>
+</ul>
+<h3 id="vienna--hooks">Hooks</h3>
+<ul>
+<li>Old-world occult societies: in a Suspected world, Vienna's lodges and séance circles are a believer ecosystem ANSCOM both mines and muddies.</li>
+<li>Cold War <a class="tl" href="#glossary--residue">residue</a>: listening posts and defector safe houses — some of what the Cold War programs heard was real (<a href="#004-ancient-cultivation-modern-bloom">004-ancient-cultivation-modern-bloom</a>).</li>
+</ul>
+<h3 id="vienna--secrets-gm-only">Secrets (GM only)</h3>
+<ul>
+<li>(open) Whether Europe's deep history means an ancestral <a class="tl" href="#glossary--seed">seed</a> lies near — or under — the hub's own patch is deliberately undecided.</li>
+</ul>
+</section><section class="note" id="hans-berger"><div class="eyebrow">Person file</div><h2>Hans Berger</h2>
+<p class="lede">The real-world inventor of the EEG (d. 1941), who built it trying to prove telepathy existed — and in this setting, quietly succeeded further than the journals record. The <a href="#013-the-berger-scale">013-the-berger-scale</a> carries his name.</p>
+<h3 id="hans-berger--at-the-table">At the table</h3>
+<ul>
+<li><strong>Tell:</strong> appears only in archives, citations, and the scale's name</li>
+<li><strong>Wants:</strong> n/a (historical, dead)</li>
+<li><strong>Fears:</strong> n/a</li>
+<li><strong>Leverage on them:</strong> n/a — leverage runs through what his unpublished late work contains and who has held it since</li>
+</ul>
+<h3 id="hans-berger--stat-block">Stat block</h3>
+<p><em>None — historical figure, dead decades before play.</em></p>
+<h3 id="hans-berger--relationships">Relationships</h3>
+<ul>
+<li> — whoever inherited/transmitted his unpublished work to the Cold War programs (undefined)</li>
+</ul>
+<h3 id="hans-berger--history">History</h3>
+<ul>
+<li>Historical: pioneered EEG at Jena, motivated by a conviction that telepathy was real; died 1941.</li>
+<li>Setting layer (lore to develop — flagged in <a href="#013-the-berger-scale">013-the-berger-scale</a>): his late work went further than the record shows; Cold War programs inherited it and named their receiver-rating scale after him.</li>
+<li>2026-08-24: note created</li>
+</ul>
+<h3 id="hans-berger--secrets-gm-only">Secrets (GM only)</h3>
+<ul>
+<li>What his late work actually demonstrated, what survives of it, and how it reached the Cold War programs — all undefined. Candidate hooks: a genuine <a class="tl" href="#glossary--receiver">receiver</a> among his subjects; an early <a class="tl" href="#glossary--liminon">liminon</a> inference decades before the particle's discovery; papers looted in 1945 by either bloc.</li>
+</ul>
+</section><section class="note" id="subject-357"><div class="eyebrow">Person file</div><h2>Subject 357</h2>
+<p class="lede">The tumor-ridden Soviet <a class="tl" href="#glossary--latent">latent</a> psi whose body secreted the Baltic <a class="tl" href="#glossary--the-substance">substance</a> (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>) — dead since 1986–87, yet load-bearing for the whole founding-era secret. Known only by their Soviet case designation; name, face, and <a class="tl" href="#glossary--lineage">lineage</a> still undefined.</p>
+<h3 id="subject-357--at-the-table">At the table</h3>
+<ul>
+<li><strong>Tell:</strong> (appears only in records, photographs, and witnesses' memories — define when first used)</li>
+<li><strong>Wants:</strong> n/a (dead); their file "wants" to stay closed</li>
+<li><strong>Fears:</strong> n/a</li>
+<li><strong>Leverage on them:</strong> n/a — leverage runs through their surviving relatives and the case doctors who watched them die</li>
+</ul>
+<h3 id="subject-357--stat-block">Stat block</h3>
+<p><em>None needed — dead before play. If flashback stats are ever required: latent psi per <span class="stub" title="not included in this dossier">53-psionic-powers</span> (latent-psi rules).</em></p>
+<h3 id="subject-357--relationships">Relationships</h3>
+<ul>
+<li> — surviving family / lineage members (undefined)</li>
+<li> — the USSR psi division's case doctors (undefined)</li>
+</ul>
+<h3 id="subject-357--history">History</h3>
+<ul>
+<li>1986: worked Chernobyl containment; strange phenomena flagged them to the USSR's psi division (name TBD); tumors incurable; catheterization of a "blood pocket" yielded the substance instead of blood (<a href="#the-subject-357-case">The Subject 357 Case</a>)</li>
+<li>1986–87: died; posthumous material entered the shipment sabotaged in the Baltic (<a href="#the-baltic-incident">The Baltic Incident</a>, <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>)</li>
+<li>2026-08-22: note created</li>
+<li>2026-08-25: designation ruled — known by the Soviet case number, not a nickname; note renamed from the earlier working handle</li>
+</ul>
+<h3 id="subject-357--secrets-gm-only">Secrets (GM only)</h3>
+<ul>
+<li>Whether radiation × latency caused the secretion is deliberately open canon (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>).</li>
+<li>Which selected lineage they belonged to — and whether the <a class="tl" href="#glossary--the-gardener">Gardener</a> noticed what their body did — undefined.</li>
 </ul>
 </section><section class="note" id="001-table-agreements"><div class="eyebrow">Canon decision 001</div><h2>Canon 001: Table agreements</h2>
 <p><em>Date: 2026-08-22</em> <em>Status: Accepted</em> <em>Revealed to players: yes — agreed at session zero; restated in the session-0 brief.</em></p>
@@ -578,7 +969,7 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <h3 id="010-the-gardener-thinks-through-receivers--retcon-cost">Retcon cost</h3>
 <p>This is now the deepest load-bearing fact after <a href="#002-psi-is-the-gardeners-cultivation">002-psi-is-the-gardeners-cultivation</a>. Retconning after any coalescence event is played would orphan the campaign's climax logic.</p>
 </section><section class="note" id="011-the-substance-came-from-subject-357"><div class="eyebrow">Canon decision 011</div><h2>Canon 011: The substance came from Subject 357</h2>
-<p><em>Date: 2026-08-22</em> <em>Status: Accepted</em> <em>Amended 2026-08-25: the source individual is designated <strong>Subject 357</strong> (their Soviet case designation); the earlier occupational nickname was struck vault-wide. Event note: <span class="stub" title="not included in this dossier">The Subject 357 Case</span>.</em> <em>Revealed to players: no — deeper than the Baltic file itself; fragments survive only in inherited Soviet records.</em></p>
+<p><em>Date: 2026-08-22</em> <em>Status: Accepted</em> <em>Amended 2026-08-25: the source individual is designated <strong>Subject 357</strong> (their Soviet case designation); the earlier occupational nickname was struck vault-wide. Event note: <a href="#the-subject-357-case">The Subject 357 Case</a>.</em> <em>Revealed to players: no — deeper than the Baltic file itself; fragments survive only in inherited Soviet records.</em></p>
 <h3 id="011-the-substance-came-from-subject-357--context">Context</h3>
 <p><a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a> deliberately left open where the Soviets obtained the psionically reactive <a class="tl" href="#glossary--the-substance">substance</a>. The GM resolved it.</p>
 <h3 id="011-the-substance-came-from-subject-357--decision">Decision</h3>
@@ -1235,232 +1626,8 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <p>The hard way: a case where the damage does not heal, the wipe does not fade, or the anti-psi escort goes down mid-sentence. Formal disclosure never happens — JDIT does not have this tier in its manuals.</p>
 <h3 id="030-the-impossible-tier-is-real--retcon-cost">Retcon cost</h3>
 <p>Low today (nothing revealed). Rises sharply the first time an uber-technique effect appears on screen — after that, the tier is table furniture and "unaided humans can't" is the load-bearing half.</p>
-</section><section class="note" id="anscom"><div class="eyebrow">Faction file</div><h2>ANSCOM</h2>
-<p class="lede">Anomalous Signals Command, <a href="#jdit">JDIT</a>'s operations arm — the outfit the PCs work for, containing liminic events case by case.</p>
-<h3 id="anscom--agenda">Agenda</h3>
-<ul>
-<li><strong>Public face:</strong> none; <a class="tl" href="#glossary--anscom">ANSCOM</a> does not publicly exist.</li>
-<li><strong>True goal:</strong> detect, contain, and close liminic events; manage <a class="tl" href="#glossary--receiver">receivers</a> before they go loud.</li>
-<li><strong>Current move:</strong> working a case queue that has climbed year over year for a decade — understaffed, stretched, veterans muttering that something changed. It has not connected the curve to a cause (<a href="#002-psi-is-the-gardeners-cultivation">002-psi-is-the-gardeners-cultivation</a>, <a href="#010-the-gardener-thinks-through-receivers">010-the-gardener-thinks-through-receivers</a>).</li>
-</ul>
-<h3 id="anscom--members">Members</h3>
-<ul>
-<li> — the PCs' handler / case officer (to be created)</li>
-<li>The PC field team</li>
-</ul>
-<h3 id="anscom--assets-territory">Assets &amp; territory</h3>
-<ul>
-<li>Field teams, detection apparatus, the <a class="tl" href="#glossary--canopy">CANOPY</a> archive of closed cases.</li>
-<li>Universal body-collection doctrine for fallen operatives — and, far above field clearance, the brain-salvage amplifier it feeds (<a href="#014-anscom-salvages-its-dead">014-anscom-salvages-its-dead</a>).</li>
-<li><strong>The exit protocol:</strong> a mandatory liminosome-disabling injection is the only retirement ANSCOM formally allows — leavers walk out diminished and psi-dead (<a href="#023-retirement-is-a-needle">023-retirement-is-a-needle</a>).</li>
-<li><strong>Silence training:</strong> all personnel — psis and mundanes alike — are trained out of the universal thought-broadcast (<a href="#027-everyone-is-broadcasting">027-everyone-is-broadcasting</a>). For recruits who manifested young, the gift of quiet is the org's first kindness; ANSCOM uses the gratitude to sell itself as caring for its people.</li>
-<li><strong>Anti-psi personnel, two tiers</strong> (<a href="#028-the-closed-list">028-the-closed-list</a>): rare unattached anti-psi agents, assigned to squads when a powerful psionic threat is expected; and a <strong>secret internal investigation/elimination squad</strong> that brings down dangerous or rogue agents — most of <a href="#jdit">JDIT</a> does not know the agent-killing squad exists. Named 2026-08-25 (two-register pass): compartment designation <strong><a class="tl" href="#glossary--deadwood">DEADWOOD</a></strong> (arboreal series with CANOPY); field whisper <strong>"the Janitors" / "os Faxineiros"</strong> (<a href="#glossary--deadwood">DEADWOOD</a>).</li>
-<li><strong>Exposure doctrine (ruled 2026-08-24, <span class="stub" title="not included in this dossier">S000-worldbuilding-options</span>):</strong> an agent whose psi nature is publicly revealed is burned — ANSCOM itself becomes the hunter, with the elimination squad and anti-psi assets on the case, relentlessly (Enemy at 15 or less). The character is effectively finished unless the rest of the squad defects with them. Mechanically: every PC carries <strong>Secret (Psi) [-30]</strong> — the "Possible Death / hunted man" tier.</li>
-</ul>
-<h3 id="anscom--relations">Relations</h3>
-<ul>
-<li><a href="#jdit">JDIT</a> — parent organization; ANSCOM has been its operations arm since the 1987 founding (<a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>)</li>
-<li><a href="#the-gardener">The Gardener</a> — double bind: hunting slows it, growing feeds it (<a href="#017-anscom-feeds-what-it-fights">017-anscom-feeds-what-it-fights</a>); corrupted individuals already embedded (extent undefined — <a href="#the-blight">The Blight</a>)</li>
-</ul>
-<h3 id="anscom--clock">Clock</h3>
-<p>Progress toward their goal; advance when sessions give them room to act.</p>
-<ul>
-<li>(define with the opening arc)</li>
-</ul>
-</section><section class="note" id="jdit"><div class="eyebrow">Faction file</div><h2>JDIT</h2>
-<p class="lede">The Joint Directorate for Irregular Threats — the treaty organization that owns the psionics secret and suppresses every rival that gets big enough to notice.</p>
-<h3 id="jdit--agenda">Agenda</h3>
-<ul>
-<li><strong>Public face:</strong> a boring, minor international defense initiative that does nothing concrete.</li>
-<li><strong>True goal:</strong> contain psionic phenomena and keep <span class="stub" title="not included in this dossier"><a class="tl" href="#glossary--canopy">CANOPY</a></span> sealed, worldwide.</li>
-<li><strong>Current move:</strong> hunting any minor org that grows big enough to show on its radar — eliminated or driven back underground.</li>
-</ul>
-<h3 id="jdit--members">Members</h3>
-<ul>
-<li><a href="#anscom">ANSCOM</a> — operations arm</li>
-<li> — director / political leadership (to be created)</li>
-</ul>
-<h3 id="jdit--assets-territory">Assets &amp; territory</h3>
-<ul>
-<li>The <a class="tl" href="#glossary--jdit">JDIT</a> convention: most states are signatories. The US and China refused the clause forbidding independent national initiatives (<a href="#003-jdit-keeps-the-field-clear">003-jdit-keeps-the-field-clear</a>).</li>
-</ul>
-<h3 id="jdit--relations">Relations</h3>
-<ul>
-<li><a href="#anscom">ANSCOM</a> — subordinate arm</li>
-<li>Rumored parallel national programs (US, China) — unconfirmed; see <a href="#003-jdit-keeps-the-field-clear">003-jdit-keeps-the-field-clear</a></li>
-</ul>
-<h3 id="jdit--clock">Clock</h3>
-<p>Progress toward their goal; advance when sessions give them room to act.</p>
-<ul>
-<li>(define when the first case establishes what JDIT is currently pushing)</li>
-</ul>
-</section><section class="note" id="the-gardener"><div class="eyebrow">Faction file</div><h2>The Gardener</h2>
-<p class="lede">A Lovecraftian entity cast to Earth millions of years ago, semi-awakened, cultivating psionic humanity as <a class="tl" href="#glossary--vessel">vessels</a> for its kind — one mind expressed through buried <a class="tl" href="#glossary--seed">seeds</a> worldwide (<a href="#006-the-gardener-fell-in-deep-time">006-the-gardener-fell-in-deep-time</a>).</p>
-<h3 id="the-gardener--agenda">Agenda</h3>
-<ul>
-<li><strong>Public face:</strong> none. Nothing on Earth knows it exists — including <a href="#jdit">JDIT</a> and <a href="#anscom">ANSCOM</a>.</li>
-<li><strong>Nature:</strong> half-awake primal cognition; intent real but erratic and unfocused; cultivation instinctual — whisper-and-seep fitness amplification of the <a class="tl" href="#glossary--receiver">receivers</a> it can sense, who shine distinctly in the <a class="tl" href="#glossary--the-undertow">Undertow</a> while mundane minds stay dim (<a href="#015-the-gardener-is-primal">015-the-gardener-is-primal</a>).</li>
-<li><strong>True goal:</strong> grow enough potent receivers to serve as the neurons of its fully instantiated mind — and as vessels for its kind (<a href="#002-psi-is-the-gardeners-cultivation">002-psi-is-the-gardeners-cultivation</a>, <a href="#010-the-gardener-thinks-through-receivers">010-the-gardener-thinks-through-receivers</a>).</li>
-<li><strong>Current move:</strong> stirring. The 20th-century <a class="tl" href="#glossary--the-bloom">bloom</a> is the <a class="tl" href="#glossary--substrate">substrate</a> approaching threshold — its brief moments of coalesced consciousness in the Undertow are growing longer and more deliberate.</li>
-</ul>
-<h3 id="the-gardener--members">Members</h3>
-<ul>
-<li>Its seeds — breeding instruments, buried worldwide; placed on the map as cases uncover them</li>
-<li>The selected <a class="tl" href="#glossary--lineage">lineages</a> (none named yet)</li>
-</ul>
-<h3 id="the-gardener--assets-territory">Assets &amp; territory</h3>
-<ul>
-<li>Multiple seeds, buried or hidden worldwide; each nudges pairings, dreams, and migrations of carrier lineages within its reach.</li>
-</ul>
-<h3 id="the-gardener--relations">Relations</h3>
-<ul>
-<li><a href="#anscom">ANSCOM</a> — unknowing antagonist AND unknowing supplier: containment prunes the crop, but recruitment and psi-tech experimentation grow it (<a href="#017-anscom-feeds-what-it-fights">017-anscom-feeds-what-it-fights</a>); it has hands inside (<a href="#the-blight">The Blight</a>).</li>
-</ul>
-<ul>
-<li><strong>Drive:</strong> anger and revenge, for now — cooling toward cold calculation as it strengthens; its <a class="tl" href="#glossary--thrall">thralls</a> inherit its current mood (violence signature) (<a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a>).</li>
-</ul>
-<h3 id="the-gardener--clock">Clock</h3>
-<p>Progress toward their goal; advance when sessions give them room to act. Sophistication scales with corrupted-psi count (<a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a>):</p>
-<ul>
-<li>a seed becomes active enough to force-grow a strong receiver</li>
-<li>instinctive flicker → tactical cunning (first coordinated case)</li>
-<li>tactical cunning → strategy (multi-case plans, cooling anger)</li>
-<li>strategy → open mastery (endgame; presumably never reached)</li>
-</ul>
-</section><section class="note" id="the-blight"><div class="eyebrow">Arc file</div><h2>The Blight</h2>
-<h3 id="the-blight--premise">Premise</h3>
-<p>Corrupted sleeper agents operate inside <a href="#anscom">ANSCOM</a> itself (<a href="#017-anscom-feeds-what-it-fights">017-anscom-feeds-what-it-fights</a>) — <strong>not an organized cell</strong>: the <a class="tl" href="#glossary--the-gardener">Gardener</a> isn't yet cognitively capable of running one (<a href="#015-the-gardener-is-primal">015-the-gardener-is-primal</a>). They are independent sleepers whose tuning makes the entity's primal wants their own, unconsciously (<a href="#025-corruption-is-openness">025-corruption-is-openness</a>); their actions converge without coordination, and from outside, convergence is indistinguishable from conspiracy. The PCs must uproot the rot — inside the one organization whose job is to notice exactly this, and which therefore cannot admit it happened.</p>
-<h3 id="the-blight--stakes">Stakes</h3>
-<p>Left alone, the sleepers steer cases: containments that fail on schedule, strong rogues who slip away, salvage-eligible bodies that reach the amplifier program (<a href="#014-anscom-salvages-its-dead">014-anscom-salvages-its-dead</a>). The Gardener gains eyes and hands inside its hunter — and every month the rot runs, the <a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a> clock ticks faster.</p>
-<h3 id="the-blight--key-entities">Key entities</h3>
-<ul>
-<li><a href="#anscom">ANSCOM</a> — host and battlefield</li>
-<li><a href="#the-gardener">The Gardener</a> — the quiet author</li>
-<li> — the sleepers (undefined; at least one senior enough to touch case routing or the amplifier's operator pool; prime profile: the rare <strong>receive-only corrupted</strong> — tuned to it but emitting nothing, invisible to the emission channel, so their entire exposure risk is behavioral (<a href="#025-corruption-is-openness">025-corruption-is-openness</a>))</li>
-<li> — the first loose thread (a case that failed too precisely)</li>
-</ul>
-<h3 id="the-blight--beats">Beats</h3>
-<p>Planned or emergent structure — mark what has fired.</p>
-<ul>
-<li>a case fails in a way only an insider could arrange</li>
-<li>the tension to resolve when fleshing out: early-era corrupted trend violent (<a href="#016-its-mind-grows-with-its-thralls">016-its-mind-grows-with-its-thralls</a>) — how do sleepers <em>last</em> inside <a class="tl" href="#glossary--anscom">ANSCOM</a>? (Candidate: most don't — the erratic get removed as misbehavers, and the dread is the pattern in that churn; the ones who endure are the rare calm ones — an early, quiet foreshadowing of the Gardener's cooling)</li>
-<li>internal investigation with no safe allies — monitoring (<a href="#012-power-estranges">012-power-estranges</a>) cuts both ways</li>
-<li>the uprooting — and the question of what ANSCOM does with corrupted colleagues it cannot admit existed</li>
-</ul>
-<h3 id="the-blight--timeline">Timeline</h3>
-<ul>
-<li>(not yet in play)</li>
-</ul>
-<h3 id="the-blight--resolution">Resolution</h3>
-<p><em>Fill when status becomes <code>resolved</code>.</em></p>
-</section><section class="note" id="baltic-hotspot"><div class="eyebrow">Location file</div><h2>Baltic Hotspot</h2>
-<p class="lede">The stretch of the Baltic Sea poisoned by <span class="stub" title="not included in this dossier">The <a class="tl" href="#glossary--the-baltic-incident">Baltic Incident</a></span> (1987, <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>) — officially an old oil-spill zone, actually Europe's most reliable generator of weird phenomena.</p>
-<h3 id="baltic-hotspot--sensory-sketch">Sensory sketch</h3>
-<ul>
-<li>Grey water that goes glass-still when nothing else does; charter captains who won't take certain headings and won't say why.</li>
-<li>Officially decommissioned monitoring buoys that someone still maintains.</li>
-</ul>
-<h3 id="baltic-hotspot--who-s-here">Who's here</h3>
-<ul>
-<li> — whoever <a class="tl" href="#glossary--anscom">ANSCOM</a> keeps watching the zone (to be created)</li>
-<li>Aging 1987 cleanup veterans, scattered around the rim states</li>
-</ul>
-<h3 id="baltic-hotspot--points-of-interest">Points of interest</h3>
-<ul>
-<li>The exclusion coordinates (never formally published, universally known to local mariners)</li>
-<li>Sealed cleanup archives (location TBD)</li>
-</ul>
-<h3 id="baltic-hotspot--hooks">Hooks</h3>
-<ul>
-<li>Phenomena reports that match no <a class="tl" href="#glossary--lineage">lineage</a> — <a class="tl" href="#glossary--noise">noises</a> with no <a class="tl" href="#glossary--receiver">receiver</a> (<a href="#007-sixty-thousand-receivers-suspected-world">007-sixty-thousand-receivers-suspected-world</a> makes those anomalous).</li>
-<li>What did the <a class="tl" href="#glossary--the-substance">substance</a> leave on the seabed? Nobody has looked in decades.</li>
-</ul>
-<h3 id="baltic-hotspot--secrets-gm-only">Secrets (GM only)</h3>
-<ul>
-<li>The substance's origin is resolved canon: human-derived, secreted by <a href="#subject-357">Subject 357</a> (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>, <span class="stub" title="not included in this dossier">The Subject 357 Case</span>).</li>
-<li>Residual self-reproducing traces may persist ("cleanup was successful" is an official phrase, not a fact).</li>
-</ul>
-</section><section class="note" id="vienna"><div class="eyebrow">Location file</div><h2>Vienna</h2>
-<p class="lede">Hub city of the PCs' <a href="#anscom">ANSCOM</a> continental circuit — a UN city where <a href="#jdit">JDIT</a>'s dull-treaty camouflage is invisible, layered over empires, Cold War listening posts, and old-world occult societies.</p>
-<h3 id="vienna--sensory-sketch">Sensory sketch</h3>
-<ul>
-<li>Trams hissing through Ringstrasse drizzle; embassy plates on every third parked car.</li>
-<li>Coffeehouse marble and cigarette-yellowed ceilings where three empires' secrets were traded; the waiter never hurries you.</li>
-<li>The UN complex's international zone: flags, glass, and corridors of people whose job titles mean nothing on purpose.</li>
-</ul>
-<h3 id="vienna--who-s-here">Who's here</h3>
-<ul>
-<li> — the PCs' <a class="tl" href="#glossary--anscom">ANSCOM</a> case officer / handler (to be created)</li>
-<li> — hub office staff (lab, archive, quartermaster — to be created)</li>
-</ul>
-<h3 id="vienna--points-of-interest">Points of interest</h3>
-<ul>
-<li>The ANSCOM hub office (cover identity and premises to be keyed — Stage 5 anchor work)</li>
-<li>Vienna International Airport — the gate to every case on the continent</li>
-</ul>
-<h3 id="vienna--hooks">Hooks</h3>
-<ul>
-<li>Old-world occult societies: in a Suspected world, Vienna's lodges and séance circles are a believer ecosystem ANSCOM both mines and muddies.</li>
-<li>Cold War <a class="tl" href="#glossary--residue">residue</a>: listening posts and defector safe houses — some of what the Cold War programs heard was real (<a href="#004-ancient-cultivation-modern-bloom">004-ancient-cultivation-modern-bloom</a>).</li>
-</ul>
-<h3 id="vienna--secrets-gm-only">Secrets (GM only)</h3>
-<ul>
-<li>(open) Whether Europe's deep history means an ancestral <a class="tl" href="#glossary--seed">seed</a> lies near — or under — the hub's own patch is deliberately undecided.</li>
-</ul>
-</section><section class="note" id="hans-berger"><div class="eyebrow">Person file</div><h2>Hans Berger</h2>
-<p class="lede">The real-world inventor of the EEG (d. 1941), who built it trying to prove telepathy existed — and in this setting, quietly succeeded further than the journals record. The <a href="#013-the-berger-scale">013-the-berger-scale</a> carries his name.</p>
-<h3 id="hans-berger--at-the-table">At the table</h3>
-<ul>
-<li><strong>Tell:</strong> appears only in archives, citations, and the scale's name</li>
-<li><strong>Wants:</strong> n/a (historical, dead)</li>
-<li><strong>Fears:</strong> n/a</li>
-<li><strong>Leverage on them:</strong> n/a — leverage runs through what his unpublished late work contains and who has held it since</li>
-</ul>
-<h3 id="hans-berger--stat-block">Stat block</h3>
-<p><em>None — historical figure, dead decades before play.</em></p>
-<h3 id="hans-berger--relationships">Relationships</h3>
-<ul>
-<li> — whoever inherited/transmitted his unpublished work to the Cold War programs (undefined)</li>
-</ul>
-<h3 id="hans-berger--history">History</h3>
-<ul>
-<li>Historical: pioneered EEG at Jena, motivated by a conviction that telepathy was real; died 1941.</li>
-<li>Setting layer (lore to develop — flagged in <a href="#013-the-berger-scale">013-the-berger-scale</a>): his late work went further than the record shows; Cold War programs inherited it and named their receiver-rating scale after him.</li>
-<li>2026-08-24: note created</li>
-</ul>
-<h3 id="hans-berger--secrets-gm-only">Secrets (GM only)</h3>
-<ul>
-<li>What his late work actually demonstrated, what survives of it, and how it reached the Cold War programs — all undefined. Candidate hooks: a genuine <a class="tl" href="#glossary--receiver">receiver</a> among his subjects; an early <a class="tl" href="#glossary--liminon">liminon</a> inference decades before the particle's discovery; papers looted in 1945 by either bloc.</li>
-</ul>
-</section><section class="note" id="subject-357"><div class="eyebrow">Person file</div><h2>Subject 357</h2>
-<p class="lede">The tumor-ridden Soviet <a class="tl" href="#glossary--latent">latent</a> psi whose body secreted the Baltic <a class="tl" href="#glossary--the-substance">substance</a> (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>) — dead since 1986–87, yet load-bearing for the whole founding-era secret. Known only by their Soviet case designation; name, face, and <a class="tl" href="#glossary--lineage">lineage</a> still undefined.</p>
-<h3 id="subject-357--at-the-table">At the table</h3>
-<ul>
-<li><strong>Tell:</strong> (appears only in records, photographs, and witnesses' memories — define when first used)</li>
-<li><strong>Wants:</strong> n/a (dead); their file "wants" to stay closed</li>
-<li><strong>Fears:</strong> n/a</li>
-<li><strong>Leverage on them:</strong> n/a — leverage runs through their surviving relatives and the case doctors who watched them die</li>
-</ul>
-<h3 id="subject-357--stat-block">Stat block</h3>
-<p><em>None needed — dead before play. If flashback stats are ever required: latent psi per <span class="stub" title="not included in this dossier">53-psionic-powers</span> (latent-psi rules).</em></p>
-<h3 id="subject-357--relationships">Relationships</h3>
-<ul>
-<li> — surviving family / lineage members (undefined)</li>
-<li> — the USSR psi division's case doctors (undefined)</li>
-</ul>
-<h3 id="subject-357--history">History</h3>
-<ul>
-<li>1986: worked Chernobyl containment; strange phenomena flagged them to the USSR's psi division (name TBD); tumors incurable; catheterization of a "blood pocket" yielded the substance instead of blood (<span class="stub" title="not included in this dossier">The Subject 357 Case</span>)</li>
-<li>1986–87: died; posthumous material entered the shipment sabotaged in the Baltic (<span class="stub" title="not included in this dossier">The <a class="tl" href="#glossary--the-baltic-incident">Baltic Incident</a></span>, <a href="#008-the-baltic-incident-founded-jdit">008-the-baltic-incident-founded-jdit</a>)</li>
-<li>2026-08-22: note created</li>
-<li>2026-08-25: designation ruled — known by the Soviet case number, not a nickname; note renamed from the earlier working handle</li>
-</ul>
-<h3 id="subject-357--secrets-gm-only">Secrets (GM only)</h3>
-<ul>
-<li>Whether radiation × latency caused the secretion is deliberately open canon (<a href="#011-the-substance-came-from-subject-357">011-the-substance-came-from-subject-357</a>).</li>
-<li>Which selected lineage they belonged to — and whether the <a class="tl" href="#glossary--the-gardener">Gardener</a> noticed what their body did — undefined.</li>
-</ul>
 </section>
+</main>
 </div>
 <script>
 (function(){
