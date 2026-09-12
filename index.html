@@ -6,9 +6,9 @@
 --page-max:66rem;--col-max:44rem;--nav-w:15rem;--gutter:2.5rem;
 --crt-bg:#0B0F0B;--crt-green:#33FF33;--crt-amber:#FFB000;
 --cls-unclassified:#007A33;--cls-unclassified-fg:#FFFFFF;--cls-restricted:#5C2E91;--cls-restricted-fg:#FFFFFF;--cls-confidential:#0033A0;--cls-confidential-fg:#FFFFFF;--cls-secret:#C8102E;--cls-secret-fg:#FFFFFF;--cls-cosmic:#FF671F;--cls-cosmic-fg:#FFFFFF;
---paper:#F4F1E8;--surface:#FBFAF5;--ink:#1F1B16;--muted:#6B6357;--line:#C9C0AE;--link:#31584E;--stamp:#9E2B25;--code-bg:#EAE5D8;--th-bg:#EFEADD;--grain-op:0.055;--grain-mode:multiply;--bg:var(--paper);--accent:var(--stamp);
+--paper:#F4F1E8;--surface:#FBFAF5;--ink:#1F1B16;--muted:#6B6357;--line:#C9C0AE;--link:#31584E;--stamp:#9E2B25;--code-bg:#EAE5D8;--th-bg:#EFEADD;--grain-op:0.055;--grain-mode:multiply;
 }
-:root[data-theme="dark"]{--paper:#14171A;--surface:#1B1F22;--ink:#D6DAD3;--muted:#8A928C;--line:#343B3E;--link:#7FAE9F;--stamp:#D4574A;--code-bg:#20262A;--th-bg:#1E2427;--grain-op:0.085;--grain-mode:screen;--bg:var(--paper);--accent:var(--stamp);}
+:root[data-theme="dark"]{--paper:#14171A;--surface:#1B1F22;--ink:#D6DAD3;--muted:#8A928C;--line:#343B3E;--link:#7FAE9F;--stamp:#D4574A;--code-bg:#20262A;--th-bg:#1E2427;--grain-op:0.085;--grain-mode:screen;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--serif);
@@ -59,7 +59,7 @@ nav.index details{margin:.9em 0 0}
 nav.index details:first-child{margin-top:0}
 nav.index .grp{font-family:var(--mono);
   font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--accent);margin:0 0 .3em;cursor:pointer;user-select:none}
+  color:var(--stamp);margin:0 0 .3em;cursor:pointer;user-select:none}
 nav.index summary.grp::marker{color:var(--muted)}
 nav.index ul{list-style:square;margin:0;padding-left:1.1em}
 nav.index li{margin:.14em 0;font-size:.93rem;break-inside:avoid}
@@ -84,18 +84,18 @@ ul{margin:.5em 0;padding-left:1.3em}
 li{margin:.3em 0}
 a{color:var(--link);text-decoration-color:color-mix(in srgb,var(--link) 45%,transparent);
   text-underline-offset:2px}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a:focus-visible{outline:2px solid var(--stamp);outline-offset:2px}
 .stub{color:var(--muted);border-bottom:1px dotted var(--muted);cursor:help}
 a.tl{text-decoration-style:dotted}
 .tip{position:fixed;z-index:10;max-width:26rem;max-height:60vh;overflow:hidden;
   background:var(--surface);border:1px solid var(--line);
-  border-left:3px solid var(--accent);padding:.65rem .95rem .7rem;
+  border-left:3px solid var(--stamp);padding:.65rem .95rem .7rem;
   font-size:.88rem;line-height:1.5;box-shadow:0 6px 24px rgba(0,0,0,.22);
   pointer-events:none;opacity:0;visibility:hidden;transition:opacity .12s}
 .tip.on{opacity:1;visibility:visible}
 .tip-title{font-family:var(--mono);
   font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);margin:0 0 .35rem}
+  color:var(--stamp);margin:0 0 .35rem}
 .tip p{margin:.4em 0}
 .tip p:first-of-type{margin-top:0}
 .tip ul{margin:.3em 0}
@@ -149,7 +149,7 @@ a.ev{position:relative;padding:.22rem 0;font-size:.82rem;line-height:1.35;
   text-decoration:none;overflow-wrap:break-word}
 a.ev::before{content:"";position:absolute;
   left:calc(var(--rail) - var(--dot) / 2 + 1px);
-  top:.62rem;width:var(--dot);height:var(--dot);background:var(--accent)}
+  top:.62rem;width:var(--dot);height:var(--dot);background:var(--stamp)}
 a.ev:hover .ev-name,a.ev:focus-visible .ev-name{text-decoration:underline}
 /* narrow: tighten the gutter rather than break the two-column reading */
 @media (max-width:34rem){
