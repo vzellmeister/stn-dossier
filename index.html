@@ -1,42 +1,55 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Signal to Noise</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap"><style>
-:root{
-  --bg:#f2f3f0; --surface:#fbfcfa; --ink:#1d2321; --muted:#5d6663;
-  --line:#c8cdc6; --accent:#a32c22; --link:#31584e;
-  --code-bg:#e8ebe6; --th-bg:#e4e8e2;
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Signal to Noise</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Archivo:wght@500;600;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"><style>:root{
+--serif:Spectral,Georgia,'Times New Roman',serif;--sans:Archivo,'Helvetica Neue',Arial,sans-serif;--mono:'Courier Prime','Courier New',monospace;
+--t-xs:0.8rem;--t-base:1rem;--t-lg:1.4rem;--t-xl:1.8rem;--lh:1.6;
+--sp-1:0.6rem;--sp-2:1.2rem;--sp-3:1.8rem;--sp-4:2.4rem;--sp-6:3.6rem;--sp-8:4.8rem;
+--page-max:66rem;--col-max:44rem;--nav-w:15rem;--gutter:2.5rem;
+--crt-bg:#0B0F0B;--crt-green:#33FF33;--crt-amber:#FFB000;
+--cls-unclassified:#007A33;--cls-unclassified-fg:#FFFFFF;--cls-restricted:#5C2E91;--cls-restricted-fg:#FFFFFF;--cls-confidential:#0033A0;--cls-confidential-fg:#FFFFFF;--cls-secret:#C8102E;--cls-secret-fg:#FFFFFF;--cls-cosmic:#FF671F;--cls-cosmic-fg:#FFFFFF;
+--paper:#F4F1E8;--surface:#FBFAF5;--ink:#1F1B16;--muted:#6B6357;--line:#C9C0AE;--link:#31584E;--stamp:#9E2B25;--code-bg:#EAE5D8;--th-bg:#EFEADD;--grain-op:0.055;--grain-mode:multiply;--bg:var(--paper);--accent:var(--stamp);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#121715; --surface:#1a201d; --ink:#d5dcd6; --muted:#8b948e;
-    --line:#33403a; --accent:#d4574a; --link:#7fae9f;
-    --code-bg:#232b27; --th-bg:#202823;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#121715; --surface:#1a201d; --ink:#d5dcd6; --muted:#8b948e;
-  --line:#33403a; --accent:#d4574a; --link:#7fae9f;
-  --code-bg:#232b27; --th-bg:#202823;
-}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:Spectral,Georgia,'Times New Roman',serif;
-  font-size:1.02rem;line-height:1.6}
-.page{max-width:66rem;margin:0 auto;padding:0 1.25rem 6rem;
-  display:grid;grid-template-columns:15rem minmax(0,44rem);
-  gap:0 2.5rem;align-items:start;justify-content:center}
+:root[data-theme="dark"]{--paper:#14171A;--surface:#1B1F22;--ink:#D6DAD3;--muted:#8A928C;--line:#343B3E;--link:#7FAE9F;--stamp:#D4574A;--code-bg:#20262A;--th-bg:#1E2427;--grain-op:0.085;--grain-mode:screen;--bg:var(--paper);--accent:var(--stamp);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);
+  font-size:var(--t-base);line-height:var(--lh)}
+/* Paper grain / film grain: a texture behind the text, never a filter
+   over it — legibility is the point of the look being imitated. */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;
+  z-index:9;opacity:var(--grain-op);mix-blend-mode:var(--grain-mode);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+.page{max-width:var(--page-max);margin:0 auto;padding:0 1.25rem 6rem;
+  display:grid;grid-template-columns:var(--nav-w) minmax(0,var(--col-max));
+  gap:0 var(--gutter);align-items:start;justify-content:center;
+  position:relative;z-index:1}
 .page>.classification{grid-column:1/-1}
 header.cover{grid-column:2;grid-row:2}
 main{grid-column:2;grid-row:3;min-width:0}
-.classification{font-family:'IBM Plex Mono','Courier New',monospace;
-  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--accent);border-top:3px double var(--accent);
-  border-bottom:1px solid var(--accent);
-  padding:.45em 0;margin:1.5rem 0 2.5rem;text-align:center}
-header.cover{margin-bottom:2.5rem}
-.eyebrow{font-family:'IBM Plex Mono','Courier New',monospace;
-  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+/* Table I: sans serif, bold, 14pt, uppercase — the banner outsizes the
+   text it guards. ISOO: top AND bottom of the document. */
+.classification{font-family:var(--sans);font-weight:700;
+  text-transform:uppercase;text-align:center;line-height:1.25;
+  padding:.3em .6em;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.classification.lg{font-size:var(--t-lg);letter-spacing:.04em}
+.classification.sm{font-size:.72rem;letter-spacing:.22em}
+.classification.top{margin:0 0 var(--sp-6)}
+.classification.bot{margin:var(--sp-6) 0 0}
+header.cover{margin-bottom:var(--sp-4)}
+.eyebrow{font-family:var(--mono);
+  font-size:var(--t-xs);letter-spacing:.2em;text-transform:uppercase;
   color:var(--muted);margin-bottom:.5rem}
-h1{font-size:2.4rem;font-weight:600;line-height:1.15;margin:.1em 0 .4em;
-  text-wrap:balance}
+h1{font-family:var(--sans);font-weight:800;font-size:var(--t-xl);
+  text-transform:uppercase;letter-spacing:.02em;
+  line-height:1.15;margin:.1em 0 .4em;text-wrap:balance}
+/* Scheme toggle: dark is opt-in, never automatic. */
+.schemebar{grid-column:1/-1;display:flex;justify-content:flex-end;
+  padding:.7rem 0 0}
+#scheme{font-family:var(--mono);font-size:var(--t-xs);
+  text-transform:uppercase;letter-spacing:.12em;background:none;
+  color:var(--muted);border:.75pt solid var(--line);
+  padding:.4em .8em;cursor:pointer}
+#scheme:hover{color:var(--stamp);border-color:var(--stamp)}
 .cover p{color:var(--muted);max-width:60ch}
 nav.index{grid-column:1;grid-row:2/span 2;position:sticky;top:1rem;
   max-height:calc(100vh - 2rem);overflow-y:auto;align-self:start;
@@ -44,21 +57,28 @@ nav.index{grid-column:1;grid-row:2/span 2;position:sticky;top:1rem;
   padding:1.1rem 1.4rem;margin:0}
 nav.index details{margin:.9em 0 0}
 nav.index details:first-child{margin-top:0}
-nav.index .grp{font-family:'IBM Plex Mono','Courier New',monospace;
+nav.index .grp{font-family:var(--mono);
   font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--accent);margin:0 0 .3em;cursor:pointer;user-select:none}
 nav.index summary.grp::marker{color:var(--muted)}
 nav.index ul{list-style:square;margin:0;padding-left:1.1em}
 nav.index li{margin:.14em 0;font-size:.93rem;break-inside:avoid}
 nav.index li::marker{color:var(--muted)}
-section.note{background:var(--surface);border:1px solid var(--line);
-  padding:1.4rem 1.7rem 1.6rem;margin:1.8rem 0}
-section.note>h2{font-size:1.5rem;font-weight:600;margin:.1em 0 .7em;
-  text-wrap:balance}
+section.note{background:var(--surface);border:.75pt solid var(--line);
+  padding:var(--sp-3) 1.7rem var(--sp-3);margin:var(--sp-3) 0}
+/* Table I: chapter/section titles are sans serif, bold, uppercase. */
+section.note>h2{font-family:var(--sans);font-size:var(--t-lg);
+  font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  margin:.1em 0 var(--sp-2);text-wrap:balance}
 section.note p.lede{font-style:italic;color:var(--muted);
-  margin:.1em 0 1.1em;padding-bottom:.9em;border-bottom:1px solid var(--line)}
-h3{font-size:1.12rem;font-weight:600;margin:1.4em 0 .4em}
-h4,h5{font-size:1rem;margin:1.2em 0 .3em}
+  margin:.1em 0 1.1em;padding-bottom:.9em;border-bottom:.75pt solid var(--line)}
+/* Primary side heads: sans, uppercase, underscored, flush left. */
+h3{font-family:var(--sans);font-size:var(--t-base);font-weight:600;
+  text-transform:uppercase;text-decoration:underline;
+  text-underline-offset:.22em;margin:var(--sp-3) 0 var(--sp-1)}
+/* Subordinate side heads: sans, upper and lower case, no underscore. */
+h4,h5{font-family:var(--sans);font-size:var(--t-base);font-weight:600;
+  margin:var(--sp-2) 0 var(--sp-1)}
 p{margin:.65em 0}
 ul{margin:.5em 0;padding-left:1.3em}
 li{margin:.3em 0}
@@ -73,21 +93,21 @@ a.tl{text-decoration-style:dotted}
   font-size:.88rem;line-height:1.5;box-shadow:0 6px 24px rgba(0,0,0,.22);
   pointer-events:none;opacity:0;visibility:hidden;transition:opacity .12s}
 .tip.on{opacity:1;visibility:visible}
-.tip-title{font-family:'IBM Plex Mono','Courier New',monospace;
+.tip-title{font-family:var(--mono);
   font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);margin:0 0 .35rem}
 .tip p{margin:.4em 0}
 .tip p:first-of-type{margin-top:0}
 .tip ul{margin:.3em 0}
 .tip a{color:inherit;text-decoration:none}
-code{font-family:'IBM Plex Mono','Courier New',monospace;font-size:.85em;
+code{font-family:var(--mono);font-size:.85em;
   background:var(--code-bg);padding:.05em .3em;border-radius:2px}
 .twrap{overflow-x:auto;margin:.8em 0}
 table{border-collapse:collapse;font-size:.9rem;
   font-variant-numeric:tabular-nums}
 th,td{border:1px solid var(--line);padding:.35em .6em;text-align:left;
   vertical-align:top}
-th{background:var(--th-bg);font-family:'IBM Plex Mono','Courier New',monospace;
+th{background:var(--th-bg);font-family:var(--mono);
   font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
   font-weight:500}
 del{color:var(--muted)}
@@ -119,10 +139,10 @@ strong{font-weight:600}
 .era-span,.ev-when{grid-column:1;text-align:right;padding-right:.4rem;
   font-variant-numeric:tabular-nums}
 .era-span{white-space:nowrap;margin-right:-.14em}
-.ev-when{font-family:'IBM Plex Mono','Courier New',monospace;font-size:.68rem;
+.ev-when{font-family:var(--mono);font-size:.68rem;
   letter-spacing:.06em;color:var(--muted)}
 .era-name,.ev-name{grid-column:3}
-.tlg-lbl{margin:0 0 .45rem;font-family:'IBM Plex Mono','Courier New',monospace;
+.tlg-lbl{margin:0 0 .45rem;font-family:var(--mono);
   font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
   line-height:1.5}
 a.ev{position:relative;padding:.22rem 0;font-size:.82rem;line-height:1.35;
@@ -143,13 +163,16 @@ a.ev:hover .ev-name,a.ev:focus-visible .ev-name{text-decoration:underline}
 }
 @media (max-width:34rem){nav.index ul{columns:1}}
 @media print{
-  .page{display:block;max-width:44rem}
+  body::before{display:none}
+  .schemebar{display:none}
+  .page{display:block;max-width:var(--col-max)}
   nav.index{position:static;max-height:none;overflow:visible;margin:2rem 0}
   section.note{break-inside:avoid;border:none;padding:0 0 1rem}
-  .classification{color:#a32c22}
 }
-</style></head><body><div class="page">
-<div class="classification">Canopy // GM eyes only — not for players</div>
+.classification{background:var(--cls-secret);color:var(--cls-secret-fg)}</style></head><body><div class="page">
+<div class="classification lg top">NATO SECRET//CANOPY — GM eyes only, not for players</div>
+<div class="schemebar"><button id="scheme" type="button"
+  aria-pressed="false">Dark scheme</button></div>
 <header class="cover">
 <div class="eyebrow">Campaign setting dossier · compiled from the vault</div>
 <h1>Signal to Noise</h1>
@@ -232,6 +255,9 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <p>Since <a href="#jdit">JDIT</a> absorbed both Cold War archives in 1987 (<a href="#founding-of-the-jdit">Founding of the JDIT</a>), the working lexicon has been a fossil bed — deliberately so, as a design principle: origin × wear locates every term in the program's history, and attentive players can read that history straight out of the slang.</p>
 <p>Terms and documentation stay <strong>English</strong>; the game is played in <strong>Portuguese</strong>, so every term also carries a settled spoken form for the table — the "PT (table speech)" line in each entry.</p>
 <h3 id="glossary--program-and-clearance">Program and clearance</h3>
+<h4 id="glossary--classification-levels">Classification levels</h4>
+<p>The ladder <a href="#jdit">JDIT</a> marks its documents on, inherited from NATO practice: <strong>COSMIC TOP SECRET</strong> (CTS), <strong>NATO SECRET</strong> (NS), <strong>NATO CONFIDENTIAL</strong> (NC), <strong>NATO RESTRICTED</strong> (NR), and <strong>NATO UNCLASSIFIED</strong> for material that carries no classification but still belongs to the organization. "COSMIC" marks ownership and is used only at the top level. Written in caps, always.</p>
+<p>A level is not a compartment: the level says how much damage disclosure does, the compartment says who is read in. Both appear in the banner, level first — <code>NATO SECRET//CANOPY//RESTRICTED HANDLING</code>. PT (table speech): the markings stay English, like the compartment codewords.</p>
 <h4 id="glossary--canopy">CANOPY</h4>
 <p>The compartment designation for the psionics secret — a container for information, never a name for any organization. "Read into CANOPY" = knows psi is real; all JDIT employees are CANOPY-read. Written in caps, always.</p>
 <p>A post-'87 JDIT compartment codeword, kept English everywhere (NATO-style, caps on paper). JDIT's compartment codewords draw from a themed <strong>arboreal series</strong> — CANOPY, DEADWOOD, and any future compartments fit the scheme. Real tradecraft forbids indicative codewords; the half-indicative themed series is JDIT's institutional vanity — and a standing GM wink the org cannot see. PT (table speech): <strong>"Canópi"</strong>; the read-in idiom is the formal <strong>"credenciado"</strong> — "ela é credenciada?" There is no slang layer: clearance talk stays stiff even in field mouths.</p>
@@ -3081,7 +3107,7 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 </ul>
 <p><em>Local copies of the primary documents are in <code>pdfs/</code>, noted per source above.</em></p>
 </section><section class="note" id="open-threads"><div class="eyebrow">Open threads</div><h2>Open threads — Signal to Noise</h2>
-<p>The central ledger of everything flagged "expand later." Each entry links to where the thread was minted; resolve an item by moving the decision into the owning articles and then <strong>deleting it</strong> — this file tracks what is still open, not what used to be. Any still-live <a class="tl" href="#glossary--residue">residue</a> of a resolved item stays behind as its own item. Checkboxes mark open work, one item per checkbox: a single yet-unanswered question (or, in the task categories, a single piece of work). A thread's shared context and banked rulings travel as italic passages under its heading or parent bullet; the thread is open while any of its checkboxes are — delete the heading with the last one. Five categories matter: <strong>chores</strong> must be settled before session 0; <strong>mechanical TODO</strong> is manual refactor work whose decisions are already made; <strong>threads</strong> are undefined lore waiting for development; <strong>revision pending</strong> holds current rulings stranded in sitting notes and awaiting promotion into the owning articles; <strong>deliberate ambiguities</strong> are load-bearing unknowns — do NOT resolve them casually, they are plot inventory.</p>
+<p>The central ledger of everything flagged "expand later." Each entry links to where the thread was minted; resolve an item by moving the decision into the owning articles and then <strong>deleting it</strong> — this file tracks what is still open, not what used to be. Any still-live <a class="tl" href="#glossary--residue">residue</a> of a resolved item stays behind as its own item. Checkboxes mark open work, one item per checkbox: a single yet-unanswered question (or, in the task categories, a single piece of work). A thread's shared context and banked rulings travel as italic passages under its heading or parent bullet; the thread is open while any of its checkboxes are — delete the heading with the last one. Five categories matter: <strong>chores</strong> must be settled before session 0; <strong>mechanical TODO</strong> is manual refactor work whose decisions are already made; <strong>threads</strong> are undefined lore waiting for development; <strong>revision pending</strong> holds current rulings stranded in sitting notes and awaiting promotion into the owning articles; <strong>deliberate ambiguities</strong> are load-bearing unknowns — do NOT resolve them casually, they are plot inventory. A final section, <strong>toolchain &amp; infrastructure</strong>, sits apart from all five: it tracks repository and tooling work and holds no campaign, setting, or lore content.</p>
 <h3 id="open-threads--chores-settle-before-session-0">Chores (settle before session 0)</h3>
 <h4 id="open-threads--corruption-the-berger-scale">Corruption &amp; the Berger scale</h4>
 <ul>
@@ -3355,10 +3381,14 @@ Dotted-underline terms reference notes not included in this dossier.</p>
 <li><strong>Deep-lore corruption</strong> — should learning Gardener-truths and experiential archive material corrupt? (deferred from <a href="#corruption">Corruption</a> — probably yes; ordinary investigation ruled clean. Decide when the campaign approaches the deep files.)</li>
 <li><strong>Does carrying a cyberpsi implant show on assays?</strong> — open since the ability-curation pass (<span class="stub" title="not included in this dossier">2026-08-24-ability-curation</span>); <a href="#the-closed-list">The Closed List</a> settles the implant's existence and provenance and says nothing about its assay signature. (Access to the implant within <a href="#anscom">ANSCOM</a> is open there too.)</li>
 <li><strong>More JDIT shade</strong> — what other grey practices does the org have? The GM wants it genuinely grey: the amplifier (<a href="#anscom">ANSCOM</a>), the mandatory decommissioning injection (<a href="#the-needle">The Needle</a>), the drug-trade funding pipeline with its city addiction agents ("JDIT's money" thread below; <a href="#anscom">ANSCOM</a>), and the memory sanitation of anyone read into — or merely brushed against — <a href="#glossary--canopy">CANOPY</a>, which ANSCOM reckons mostly consequenceless (<a href="#anscom">ANSCOM</a>) are canon; others to come.</li>
-<li>_Candidate: informal, un-needled retirement for assets too valuable to dim (<a href="#the-needle">The Needle</a></li>
+<li>_Candidate: informal, un-needled retirement for assets too valuable to dim (<a href="#the-needle">The Needle</a>   Not allow-list problems — do not add these:</li>
+<li>www.cdse.edu returns HTTP 403 Forbidden (their server refuses; an allow-list entry will not help).</li>
+<li>A blanket *.mil rule would be both too broad and beside the point: armypubs.army.mil and dni.gov both fetch normally. The blocks are specific hosts, not a .mil pattern.</li>
+<li>Bash has no outbound network at all (CONNECT returns 403). That is a separate layer from the WebFetch allow-list, and it is why the research agents hand-wrote PDF text extractors in Python instead of using pdftotext.</li>
 </ul>
 </section>
 </main>
+<div class="classification lg bot">NATO SECRET//CANOPY — GM eyes only, not for players</div>
 </div>
 <script>
 (function(){
@@ -3423,5 +3453,17 @@ Dotted-underline terms reference notes not included in this dossier.</p>
   });
   document.addEventListener('focusout',hide);
   window.addEventListener('scroll',hide,{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var r=document.documentElement,b=document.getElementById('scheme');
+  if(!b)return;
+  b.addEventListener('click',function(){
+    var dark=r.getAttribute('data-theme')==='dark';
+    r.setAttribute('data-theme',dark?'light':'dark');
+    b.setAttribute('aria-pressed',String(!dark));
+    b.textContent=dark?'Dark scheme':'Light scheme';
+  });
 })();
 </script></body></html>
